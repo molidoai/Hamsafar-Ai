@@ -3,55 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MOLIDO HAMSAFAR</title>
-  <style>
-    body { font-family: Tahoma, sans-serif; margin: 0; background: #0f172a; color: #e2e8f0; }
-    main { max-width: 760px; margin: 0 auto; padding: 32px 20px; }
-    .card { background: #1e293b; border-radius: 16px; padding: 20px; margin: 12px 0; }
-    button, input { padding: 10px 12px; border-radius: 10px; border: 0; }
-    button { background: #22c55e; cursor: pointer; }
-    input { width: 100%; box-sizing: border-box; margin: 6px 0; }
-    pre { white-space: pre-wrap; }
-  </style>
+  <title>مولیدو همسفر</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <main>
+  <header>
     <h1>مولیدو همسفر</h1>
-    <p>نسخه محلی بدون سرور ابری. دامنه بعدی: hamsafa.molido.shop</p>
-    <div class="card">
+    <p>نسخه تست محلی • بدون هاست</p>
+  </header>
+  <nav>
+    <button onclick="show('home')">خانه</button>
+    <button onclick="show('dest')">مقصد</button>
+    <button onclick="show('sos')">اضطراری</button>
+    <button onclick="show('status')">وضعیت</button>
+  </nav>
+  <main>
+    <section id="home" class="page">
       <input id="email" value="demo@molido.shop" />
-      <input id="password" value="secret123" type="password" />
-      <button onclick="boot()">ورود و ساخت سفر آزمایشی</button>
-    </div>
-    <div class="card">
+      <input id="password" type="password" value="secret123" />
+      <button class="primary" onclick="loginAndTrip()">ورود و ساخت سفر</button>
+      <p id="homeOut">برای تست، اول API محلی را روشن کنید.</p>
+    </section>
+    <section id="dest" class="page hidden">
       <input id="q" value="اصفهان" />
-      <button onclick="searchDest()">جستجوی مقصد</button>
+      <button class="primary" onclick="searchDest()">جستجو</button>
       <div id="places"></div>
-    </div>
-    <div class="card"><pre id="out">آماده اجرای محلی روی API پورت 8080</pre></div>
+    </section>
+    <section id="sos" class="page hidden">
+      <p>ارسال آزمایشی SOS برای مخاطب مطمئن.</p>
+      <button class="danger" onclick="sendSos()">ارسال SOS</button>
+      <p id="sosOut"></p>
+    </section>
+    <section id="status" class="page hidden">
+      <button class="primary" onclick="loadHealth()">بررسی سلامت</button>
+      <pre id="healthOut"></pre>
+    </section>
   </main>
-  <script>
-    const API = "http://127.0.0.1:8080";
-    async function boot() {
-      const out = document.getElementById("out");
-      try {
-        await fetch(API + "/auth/register", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: email.value, password: password.value }) });
-        const login = await fetch(API + "/auth/login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: email.value, password: password.value }) }).then(r => r.json());
-        const trip = await fetch(API + "/trips", { method: "POST", headers: { "content-type": "application/json", authorization: "Bearer " + login.token }, body: JSON.stringify({ title: "سفر محلی", stops: [{ name: "تهران", lat: 35.7, lng: 51.4 }, { name: "مشهد", lat: 36.3, lng: 59.6 }] }) }).then(r => r.json());
-        out.textContent = JSON.stringify({ login: login.userId, trip }, null, 2);
-      } catch (e) {
-        out.textContent = "API محلی در دسترس نیست. اول سرویس را روی پورت 8080 اجرا کنید.";
-      }
-    }
-    async function searchDest() {
-      const box = document.getElementById("places");
-      try {
-        const rows = await fetch(API + "/destinations?q=" + encodeURIComponent(q.value)).then(r => r.json());
-        box.innerHTML = rows.map(p => `<p>${p.name} — ${p.city} — تازگی: ${p.freshness}${p.warning ? " — " + p.warning : ""}</p>`).join("");
-      } catch (e) {
-        box.textContent = "API در دسترس نیست";
-      }
-    }
-  </script>
+  <script src="./app.js"></script>
 </body>
 </html>

@@ -9,8 +9,8 @@
 
 - مخزن: [molidoai/Hamsafar-Ai](https://github.com/molidoai/Hamsafar-Ai)
 - دامنه Staging: `hamsafa.molido.shop`
-- لایه فعال: **Local Resilience**
-- وضعیت فاز 000 تا 006: `PASS`
+- لایه فعال: **Application**
+- وضعیت فاز 000 تا 007: `PASS`
 - سرور ابری: فعلاً لازم نیست
 
 ## اجرای محلی
@@ -20,7 +20,15 @@ cd services/api
 npx --yes tsx src/server.ts
 ```
 
-سپس فایل `apps/web/index.html` را باز کنید. API روی `http://127.0.0.1:8080` است.
+سپس اپ وب را باز کنید: `apps/web/index.html`
+
+اپ موبایل:
+
+```bash
+cd apps/mobile
+flutter pub get
+flutter run
+```
 
 ## معماری اجرایی قفل‌شده
 
