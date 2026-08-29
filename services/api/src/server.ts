@@ -8,6 +8,7 @@ import { enqueue, processQueue } from "../../../packages/product-core/src/offlin
 import { t } from "../../../packages/localization/src";
 import { decideAutonomy } from "../../../packages/governance/src/autonomy/governor";
 import { estimateAndReserve } from "../../../packages/governance/src/token/economy";
+import { presentPlace, searchPlaces } from "../../../packages/destinations/src";
 
 function readBody(req: IncomingMessage): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -44,6 +45,16 @@ export function createApp() {
     try {
       if (req.method === "GET" && url.pathname === "/health") {
         return send(res, 200, { ok: true, env: "local", domain: "hamsafa.molido.shop" });
+      }
+      if (req.method === "GET" && url.pathname === "/destinations") {
+        const q = url.searchParams.get("q") || "";
+        return send(res, 200, searchPlaces(q).map(presentPlace));
+      }
+      if (req.method === "GET" && url.pathname === "/control/status") {
+        return send(res, 200, {
+          phases: { "000": "PASS", "001": "PASS", "002": "PASS", "003": "PASS", "004": "PASS" },
+          server: "local-only",
+        });
       }
       if (req.method === "GET" && url.pathname === "/i18n") {
         return send(res, 200, {

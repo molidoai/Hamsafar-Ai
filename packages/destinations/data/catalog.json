@@ -1,0 +1,56 @@
+{
+  "places": [
+    {
+      "id": "ir-teh",
+      "country": "Iran",
+      "city": "Tehran",
+      "name": "تهران",
+      "lat": 35.6892,
+      "lng": 51.389,
+      "freshness": "aging",
+      "confidence": 0.72,
+      "source": "seed-catalog",
+      "safety": "urban",
+      "tags": ["capital", "transit"]
+    },
+    {
+      "id": "ir-isf",
+      "country": "Iran",
+      "city": "Isfahan",
+      "name": "اصفهان",
+      "lat": 32.6546,
+      "lng": 51.668,
+      "freshness": "fresh",
+      "confidence": 0.8,
+      "source": "seed-catalog",
+      "safety": "urban",
+      "tags": ["heritage", "tourism"]
+    },
+    {
+      "id": "ir-shz",
+      "country": "Iran",
+      "city": "Shiraz",
+      "name": "شیراز",
+      "lat": 29.5918,
+      "lng": 52.5836,
+      "freshness": "fresh",
+      "confidence": 0.78,
+      "source": "seed-catalog",
+      "safety": "urban",
+      "tags": ["heritage", "garden"]
+    },
+    {
+      "id": "tr-ist",
+      "country": "Turkey",
+      "city": "Istanbul",
+      "name": "استانبول",
+      "lat": 41.0082,
+      "lng": 28.9784,
+      "freshness": "aging",
+      "confidence": 0.7,
+      "source": "seed-catalog",
+      "safety": "urban",
+      "tags": ["transit", "tourism"]
+    }
+  ]
+}

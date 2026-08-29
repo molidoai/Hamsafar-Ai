@@ -20,6 +20,8 @@ async function main() {
 
   const health = await req(port, "GET", "/health");
   if (health.status !== 200 || !health.json.ok) throw new Error("health failed");
+  const dest = await req(port, "GET", "/destinations?q=اصفهان");
+  if (dest.status !== 200 || !dest.json.length) throw new Error("destinations failed");
 
   const reg = await req(port, "POST", "/auth/register", {
     email: "a@molido.shop",
