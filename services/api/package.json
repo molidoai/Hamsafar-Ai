@@ -1,0 +1,9 @@
+{
+  "name": "@molido/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npx --yes tsx src/server.ts",
+    "test": "npx --yes tsx tests/api.test.ts"
+  }
+}

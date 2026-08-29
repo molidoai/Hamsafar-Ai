@@ -9,10 +9,18 @@
 
 - مخزن: [molidoai/Hamsafar-Ai](https://github.com/molidoai/Hamsafar-Ai)
 - دامنه Staging: `hamsafa.molido.shop`
-- لایه فعال: **Usable Product Core**
-- وضعیت فاز 000: `PASS`
-- وضعیت فاز 001: `PASS`
-- وضعیت فاز 002: `PASS`
+- لایه فعال: **Local Platform**
+- وضعیت فاز 000 تا 003: `PASS`
+- سرور ابری: فعلاً لازم نیست
+
+## اجرای محلی
+
+```bash
+cd services/api
+npx --yes tsx src/server.ts
+```
+
+سپس فایل `apps/web/index.html` را باز کنید. API روی `http://127.0.0.1:8080` است.
 
 ## معماری اجرایی قفل‌شده
 
