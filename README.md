@@ -9,8 +9,9 @@
 
 - مخزن: [molidoai/Hamsafar-Ai](https://github.com/molidoai/Hamsafar-Ai)
 - دامنه Staging: `hamsafa.molido.shop`
-- لایه فعال: **Foundation Lock**
-- وضعیت فاز 000: `IN PROGRESS`
+- لایه فعال: **Governed Core**
+- وضعیت فاز 000: `PASS`
+- وضعیت فاز 001: `PASS`
 
 ## معماری اجرایی قفل‌شده
 

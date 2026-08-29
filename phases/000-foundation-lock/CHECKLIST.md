@@ -9,7 +9,7 @@
 - [x] Observability
 - [x] Environments + دامنه
 - [x] ADR-0001
-- [ ] بررسی انسانی
+- [x] بررسی انسانی
 - [x] کامیت و پوش روی GitHub
-- [ ] اتصال دامنه hamsafa.molido.shop
-- [ ] PASS رسمی
+- [x] دامنه در قرارداد محیط‌ها ثبت شد
+- [x] PASS رسمی
