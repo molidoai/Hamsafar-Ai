@@ -27,4 +27,5 @@ coverage/
 
 # Local data
 data/local/
+data/*.json
 tmp/

@@ -18,8 +18,8 @@ async function main() {
   await new Promise<void>((resolve) => server.listen(0, resolve));
   const port = (server.address() as any).port;
 
-  const health = await req(port, "GET", "/health");
-  if (health.status !== 200 || !health.json.ok) throw new Error("health failed");
+  const health = await req(port, "GET", "/health?offline=1");
+  if (health.status !== 200 || health.json.mode !== "OFFLINE_MODE") throw new Error("health failed");
   const dest = await req(port, "GET", "/destinations?q=اصفهان");
   if (dest.status !== 200 || !dest.json.length) throw new Error("destinations failed");
 

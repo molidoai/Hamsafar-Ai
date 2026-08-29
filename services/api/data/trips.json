@@ -1,0 +1,27 @@
+[
+  {
+    "id": "trip_1788018591498",
+    "userId": "user_1",
+    "title": "سفر آزمایشی",
+    "stops": [
+      {
+        "name": "تهران",
+        "lat": 35.7,
+        "lng": 51.4,
+        "id": "stop_1",
+        "order": 1
+      },
+      {
+        "name": "شیراز",
+        "lat": 29.6,
+        "lng": 52.5,
+        "id": "stop_2",
+        "order": 2
+      }
+    ],
+    "status": "draft",
+    "createdAt": "2026-08-29T15:49:51.498Z",
+    "updatedAt": "2026-08-29T15:49:51.498Z",
+    "offlineDirty": true
+  }
+]

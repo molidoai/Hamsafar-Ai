@@ -10,6 +10,9 @@ import { t } from "../../../packages/localization/src";
 import { decideAutonomy } from "../../../packages/governance/src/autonomy/governor";
 import { estimateAndReserve } from "../../../packages/governance/src/token/economy";
 import { presentPlace, searchPlaces } from "../../../packages/destinations/src";
+import { enabledFeatures, resolveMode } from "../../../packages/product-core/src/degrade/modes";
+import { listNotices, pushNotice } from "../../../packages/product-core/src/notify/local";
+import { saveJson } from "../../../packages/storage/src";
 
 function readBody(req: IncomingMessage): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -45,7 +48,23 @@ export function createApp() {
     if (req.method === "OPTIONS") return send(res, 204, {});
     try {
       if (req.method === "GET" && url.pathname === "/health") {
-        return send(res, 200, { ok: true, env: "local", domain: "hamsafa.molido.shop" });
+        const offline = url.searchParams.get("offline") === "1";
+        const mode = resolveMode({
+          aiAvailable: !offline,
+          networkAvailable: !offline,
+          externalApisAvailable: !offline,
+          storageAvailable: true,
+        });
+        return send(res, 200, {
+          ok: true,
+          env: "local",
+          domain: "hamsafa.molido.shop",
+          mode,
+          features: enabledFeatures(mode),
+        });
+      }
+      if (req.method === "GET" && url.pathname === "/notices") {
+        return send(res, 200, listNotices());
       }
       if (req.method === "GET" && url.pathname === "/destinations") {
         const q = url.searchParams.get("q") || "";
@@ -53,7 +72,7 @@ export function createApp() {
       }
       if (req.method === "GET" && url.pathname === "/control/status") {
         return send(res, 200, {
-          phases: { "000": "PASS", "001": "PASS", "002": "PASS", "003": "PASS", "004": "PASS" },
+          phases: { "000": "PASS", "001": "PASS", "002": "PASS", "003": "PASS", "004": "PASS", "005": "PASS", "006": "PASS" },
           server: "local-only",
         });
       }
@@ -79,6 +98,8 @@ export function createApp() {
         const body = await readBody(req);
         const trip = createTrip(session.userId, body.title, body.stops || []);
         enqueue("trip", trip);
+        saveJson("data/trips.json", listUserTrips(session.userId));
+        pushNotice("trip", "سفر ذخیره شد", trip.title);
         return send(res, 201, trip);
       }
       if (req.method === "GET" && url.pathname === "/trips") {

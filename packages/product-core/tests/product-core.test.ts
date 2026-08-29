@@ -4,6 +4,8 @@ import { evaluateSpeed } from "../src/safety/road";
 import { addTrustedContact, triggerSos } from "../src/emergency/sos";
 import { enqueue, processQueue, pendingCount } from "../src/offline/sync";
 import { addMember, canShareLocation, createGroup } from "../src/groups/family";
+import { enabledFeatures, resolveMode } from "../src/degrade/modes";
+import { listNotices, pushNotice } from "../src/notify/local";
 
 const trip = createTrip("user_1", "تهران تا اصفهان", [
   { name: "تهران", lat: 35.7, lng: 51.4 },
@@ -43,5 +45,17 @@ const group = createGroup("user_1", "خانواده");
 addMember(group.id, "user_1", "user_2", "adult");
 if (canShareLocation(group, "user_2", false)) throw new Error("location requires consent");
 if (!canShareLocation(group, "user_2", true)) throw new Error("consent share failed");
+
+const offlineMode = resolveMode({
+  aiAvailable: false,
+  networkAvailable: false,
+  externalApisAvailable: false,
+  storageAvailable: true,
+});
+if (offlineMode !== "OFFLINE_MODE") throw new Error("offline mode failed");
+if (enabledFeatures(offlineMode).includes("ai.assist")) throw new Error("ai must drop first");
+if (!enabledFeatures("CORE_SAFETY_MODE").includes("emergency.sos")) throw new Error("sos must remain");
+pushNotice("system", "حالت آفلاین", "شبکه قطع است");
+if (!listNotices().length) throw new Error("notice failed");
 
 console.log("USABLE_PRODUCT_CORE_TESTS_PASS");

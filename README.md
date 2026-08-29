@@ -9,8 +9,8 @@
 
 - مخزن: [molidoai/Hamsafar-Ai](https://github.com/molidoai/Hamsafar-Ai)
 - دامنه Staging: `hamsafa.molido.shop`
-- لایه فعال: **Client Surface**
-- وضعیت فاز 000 تا 005: `PASS`
+- لایه فعال: **Local Resilience**
+- وضعیت فاز 000 تا 006: `PASS`
 - سرور ابری: فعلاً لازم نیست
 
 ## اجرای محلی
