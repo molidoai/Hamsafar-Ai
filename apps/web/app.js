@@ -87,3 +87,18 @@ async function loadHealth() {
     box.textContent = "قطع است. در پوشه services/api دستور npx tsx src/server.ts را بزنید.";
   }
 }
+
+async function checkAppUpdate() {
+  const box = document.getElementById("updateBanner");
+  if (!box) return;
+  try {
+    const data = await fetch(API + "/update/check?platform=web&current=0.1.0").then((r) => r.json());
+    box.textContent = data.updateAvailable
+      ? "نسخه جدید " + data.latest + " آماده است"
+      : "نسخه فعلی به‌روز است (" + data.current + ")";
+  } catch (e) {
+    box.textContent = "بررسی آپدیت ممکن نیست تا API روشن شود";
+  }
+}
+
+checkAppUpdate();

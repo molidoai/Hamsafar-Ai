@@ -13,6 +13,19 @@ import { presentPlace, searchPlaces } from "../../../packages/destinations/src";
 import { enabledFeatures, resolveMode } from "../../../packages/product-core/src/degrade/modes";
 import { listNotices, pushNotice } from "../../../packages/product-core/src/notify/local";
 import { saveJson } from "../../../packages/storage/src";
+import { checkUpdate, verifyManifestSignature, UpdateManifest } from "../../../packages/updates/src";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+
+function loadManifest(): UpdateManifest {
+  const paths = [
+    join(process.cwd(), "infrastructure/updates/manifest.json"),
+    join(process.cwd(), "../../infrastructure/updates/manifest.json"),
+  ];
+  const file = paths.find((p) => existsSync(p));
+  if (!file) throw new Error("UPDATE_MANIFEST_MISSING");
+  return JSON.parse(readFileSync(file, "utf8"));
+}
 
 function readBody(req: IncomingMessage): Promise<any> {
   return new Promise((resolve, reject) => {
@@ -65,6 +78,20 @@ export function createApp() {
       }
       if (req.method === "GET" && url.pathname === "/notices") {
         return send(res, 200, listNotices());
+      }
+      if (req.method === "GET" && url.pathname === "/update/check") {
+        const manifest = loadManifest();
+        if (!verifyManifestSignature(manifest)) {
+          return send(res, 400, { error: "INVALID_UPDATE_SIGNATURE" });
+        }
+        const current = url.searchParams.get("current") || "0.1.0";
+        const platform = url.searchParams.get("platform") || "web";
+        const result = checkUpdate(current, manifest);
+        return send(res, 200, {
+          ...result,
+          platform,
+          artifact: manifest.artifacts[platform as "android" | "ios" | "web"],
+        });
       }
       if (req.method === "GET" && url.pathname === "/destinations") {
         const q = url.searchParams.get("q") || "";

@@ -1,6 +1,6 @@
 [
   {
-    "id": "trip_1788018591498",
+    "id": "trip_1788020223210",
     "userId": "user_1",
     "title": "سفر آزمایشی",
     "stops": [
@@ -20,8 +20,8 @@
       }
     ],
     "status": "draft",
-    "createdAt": "2026-08-29T15:49:51.498Z",
-    "updatedAt": "2026-08-29T15:49:51.498Z",
+    "createdAt": "2026-08-29T16:17:03.210Z",
+    "updatedAt": "2026-08-29T16:17:03.210Z",
     "offlineDirty": true
   }
 ]

@@ -1,0 +1,27 @@
+{
+  "app": "molido-hamsafar",
+  "latest": "0.1.0",
+  "minSupported": "0.1.0",
+  "channel": "local",
+  "notes": "نسخه اولیه محلی. به‌روزرسانی خودکار از مسیر GitHub Releases فعال می‌شود.",
+  "releasedAt": "2026-08-29",
+  "signature": {
+    "algorithm": "SHA256-MANIFEST",
+    "keyId": "molido-release-dev",
+    "value": "sig_dev_phase008"
+  },
+  "artifacts": {
+    "android": {
+      "url": "https://github.com/molidoai/Hamsafar-Ai/releases/latest",
+      "sha256": "pending-first-signed-apk",
+      "signed": true,
+      "required": false
+    },
+    "web": {
+      "url": "https://github.com/molidoai/Hamsafar-Ai/tree/main/apps/web",
+      "sha256": "pending",
+      "signed": false,
+      "required": false
+    }
+  }
+}

@@ -36,6 +36,21 @@ class _ShellPageState extends State<ShellPage> {
   final password = TextEditingController(text: 'secret123');
   final query = TextEditingController(text: 'اصفهان');
   List places = [];
+  String updateText = 'در حال بررسی نسخه...';
+
+  @override
+  void initState() {
+    super.initState();
+    api.checkUpdate().then((u) {
+      setState(() {
+        updateText = u['updateAvailable'] == true
+            ? 'نسخه جدید ${u['latest']} آماده است'
+            : 'نسخه فعلی به‌روز است (${u['current']})';
+      });
+    }).catchError((_) {
+      setState(() => updateText = 'بررسی آپدیت در حالت آفلاین ممکن نیست');
+    });
+  }
 
   Future<void> _run(Future<void> Function() job) async {
     try {
@@ -87,6 +102,8 @@ class _ShellPageState extends State<ShellPage> {
           }),
           child: const Text('ورود و ساخت سفر'),
         ),
+        const SizedBox(height: 12),
+        Text(updateText),
         const SizedBox(height: 12),
         Text(output),
       ],

@@ -27,6 +27,10 @@ class HamsafarApi {
 
   Future<Map<String, dynamic>> health() => _json('GET', '/health');
 
+  Future<Map<String, dynamic>> checkUpdate({String current = '0.1.0'}) {
+    return _json('GET', '/update/check?platform=android&current=$current');
+  }
+
   Future<void> register(String email, String password) async {
     await _json('POST', '/auth/register', body: {'email': email, 'password': password});
   }

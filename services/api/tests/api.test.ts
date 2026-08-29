@@ -22,6 +22,8 @@ async function main() {
   if (health.status !== 200 || health.json.mode !== "OFFLINE_MODE") throw new Error("health failed");
   const dest = await req(port, "GET", "/destinations?q=اصفهان");
   if (dest.status !== 200 || !dest.json.length) throw new Error("destinations failed");
+  const upd = await req(port, "GET", "/update/check?platform=web&current=0.1.0");
+  if (upd.status !== 200 || upd.json.updateAvailable !== false) throw new Error("update check failed");
 
   const reg = await req(port, "POST", "/auth/register", {
     email: "a@molido.shop",
