@@ -3,6 +3,7 @@ import { planRoute } from "../src/navigation/routing";
 import { evaluateSpeed } from "../src/safety/road";
 import { addTrustedContact, triggerSos } from "../src/emergency/sos";
 import { enqueue, processQueue, pendingCount } from "../src/offline/sync";
+import { addMember, canShareLocation, createGroup } from "../src/groups/family";
 
 const trip = createTrip("user_1", "تهران تا اصفهان", [
   { name: "تهران", lat: 35.7, lng: 51.4 },
@@ -37,5 +38,10 @@ enqueue("trip", trip);
 if (pendingCount() !== 1) throw new Error("queue failed");
 processQueue(true);
 if (pendingCount() !== 0) throw new Error("sync failed");
+
+const group = createGroup("user_1", "خانواده");
+addMember(group.id, "user_1", "user_2", "adult");
+if (canShareLocation(group, "user_2", false)) throw new Error("location requires consent");
+if (!canShareLocation(group, "user_2", true)) throw new Error("consent share failed");
 
 console.log("USABLE_PRODUCT_CORE_TESTS_PASS");

@@ -5,6 +5,7 @@ import { planRoute } from "../../../packages/product-core/src/navigation/routing
 import { evaluateSpeed } from "../../../packages/product-core/src/safety/road";
 import { addTrustedContact, triggerSos } from "../../../packages/product-core/src/emergency/sos";
 import { enqueue, processQueue } from "../../../packages/product-core/src/offline/sync";
+import { addMember, createGroup } from "../../../packages/product-core/src/groups/family";
 import { t } from "../../../packages/localization/src";
 import { decideAutonomy } from "../../../packages/governance/src/autonomy/governor";
 import { estimateAndReserve } from "../../../packages/governance/src/token/economy";
@@ -112,6 +113,14 @@ export function createApp() {
       }
       if (req.method === "POST" && url.pathname === "/sync") {
         return send(res, 200, processQueue(true));
+      }
+      if (req.method === "POST" && url.pathname === "/groups") {
+        const body = await readBody(req);
+        return send(res, 201, createGroup(session.userId, body.name || "خانواده"));
+      }
+      if (req.method === "POST" && url.pathname === "/groups/members") {
+        const body = await readBody(req);
+        return send(res, 200, addMember(body.groupId, session.userId, body.userId, body.role || "member"));
       }
       return send(res, 404, { error: "NOT_FOUND" });
     } catch (e: any) {

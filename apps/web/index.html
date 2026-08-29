@@ -23,6 +23,11 @@
       <input id="password" value="secret123" type="password" />
       <button onclick="boot()">ورود و ساخت سفر آزمایشی</button>
     </div>
+    <div class="card">
+      <input id="q" value="اصفهان" />
+      <button onclick="searchDest()">جستجوی مقصد</button>
+      <div id="places"></div>
+    </div>
     <div class="card"><pre id="out">آماده اجرای محلی روی API پورت 8080</pre></div>
   </main>
   <script>
@@ -36,6 +41,15 @@
         out.textContent = JSON.stringify({ login: login.userId, trip }, null, 2);
       } catch (e) {
         out.textContent = "API محلی در دسترس نیست. اول سرویس را روی پورت 8080 اجرا کنید.";
+      }
+    }
+    async function searchDest() {
+      const box = document.getElementById("places");
+      try {
+        const rows = await fetch(API + "/destinations?q=" + encodeURIComponent(q.value)).then(r => r.json());
+        box.innerHTML = rows.map(p => `<p>${p.name} — ${p.city} — تازگی: ${p.freshness}${p.warning ? " — " + p.warning : ""}</p>`).join("");
+      } catch (e) {
+        box.textContent = "API در دسترس نیست";
       }
     }
   </script>
