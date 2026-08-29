@@ -10,6 +10,6 @@
 - [x] Environments + دامنه
 - [x] ADR-0001
 - [ ] بررسی انسانی
-- [ ] کامیت و پوش روی GitHub
+- [x] کامیت و پوش روی GitHub
 - [ ] اتصال دامنه hamsafa.molido.shop
 - [ ] PASS رسمی
