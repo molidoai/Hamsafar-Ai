@@ -1,0 +1,11 @@
+{
+  "name": "MOLIDO HAMSAFAR",
+  "short_name": "همسفر",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#07070c",
+  "theme_color": "#07070c",
+  "lang": "fa",
+  "dir": "rtl",
+  "icons": []
+}
