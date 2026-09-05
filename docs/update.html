@@ -10,7 +10,7 @@
 <main class="wrap">
   <div class="top"><span class="brand">MOLIDO</span><span class="ver">به‌روز</span></div>
   <h1>نسخه منتشر</h1>
-  <pre id="out" class="card" style="white-space:pre-wrap"></pre>
+  <article class="card" id="out">در حال خواندن…</article>
 </main>
 <nav class="dock">
   <a href="./more.html">بیشتر</a>
@@ -19,8 +19,13 @@
 </nav>
 <script>
 fetch("./update.json").then(r=>r.json()).then(j=>{
-  document.getElementById("out").textContent =
-    "نسخه "+j.versionName+"\nکد "+j.versionCode+"\nامضا "+(j.signing||[]).join(",")+"\nAPK "+(j.apk||"منتشر نیست");
+  const apk = j.apk && j.apk !== "null";
+  document.getElementById("out").innerHTML =
+    "<p>نسخه "+j.versionName+" — کد "+j.versionCode+"</p>"+
+    "<p>امضا "+(j.signing||[]).join(" / ")+"</p>"+
+    "<p>APK: "+(apk?("<a href='"+j.apk+"'>دانلود</a>"):"منتشر نیست")+"</p>"+
+    "<p>SHA-256 فایل: "+(j.apkSha256||"—")+"</p>"+
+    "<p>گواهی: "+(j.certSha256||"—")+"</p>";
 }).catch(()=>document.getElementById("out").textContent="مانیفست خوانده نشد");
 </script>
 </body></html>
