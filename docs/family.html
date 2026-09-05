@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>خانواده همسفر</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">خانواده</span></div>
+  <h1>گروه سفر</h1>
+  <p class="lead">اعضا روی همین گوشی ذخیره می‌شوند. ردیابی زنده بین چند دستگاه نیاز به سرور دارد.</p>
+  <input id="name" class="card" placeholder="نام عضو" style="width:100%;margin-bottom:10px"/>
+  <button class="btn" id="add" type="button">افزودن عضو</button>
+  <div id="out" class="card" style="margin-top:16px"></div>
+</main>
+<nav class="dock">
+  <a href="./index.html">خانه</a>
+  <a href="./trip.html">سفر</a>
+  <a class="active" href="./family.html">گروه</a>
+  <a href="./sos.html">SOS</a>
+</nav>
+<script>
+function render(){
+  const rows = JSON.parse(localStorage.getItem("hamsafar_family")||"[]");
+  document.getElementById("out").innerHTML = rows.map(r=>`<div><b>${r.name}</b></div>`).join("") || "عضوی نیست";
+}
+document.getElementById("add").onclick=()=>{
+  const name=document.getElementById("name").value.trim();
+  if(!name) return;
+  const rows=JSON.parse(localStorage.getItem("hamsafar_family")||"[]");
+  rows.push({name, at:Date.now()});
+  localStorage.setItem("hamsafar_family", JSON.stringify(rows.slice(0,12)));
+  document.getElementById("name").value="";
+  render();
+};
+render();
+</script>
+</body></html>
