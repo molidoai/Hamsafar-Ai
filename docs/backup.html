@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>پشتیبان</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">پشتیبان</span></div>
+  <h1>خروجی و بازگردانی</h1>
+  <p class="lead">فایل روی خود گوشی می‌ماند. به ابر نمی‌رود.</p>
+  <button class="btn" id="out" type="button">دانلود JSON</button>
+  <input id="file" type="file" accept="application/json" style="margin:12px 0;display:block"/>
+  <button class="btn ghost" id="inn" type="button">بازگردانی</button>
+  <div id="msg" class="card" style="margin-top:12px"></div>
+</main>
+<nav class="dock">
+  <a href="./security.html">امنیت</a>
+  <a class="active" href="./backup.html">پشتیبان</a>
+  <a href="./more.html">بیشتر</a>
+</nav>
+<script>
+const keys=["hamsafar_trips","hamsafar_sos","hamsafar_family","hamsafar_edition","hamsafar_journal","hamsafar_check","hamsafar_exp","hamsafar_roads","hamsafar_contacts"];
+function pack(){const o={v:"0.3.1",at:Date.now()};keys.forEach(k=>o[k]=localStorage.getItem(k));return o;}
+document.getElementById("out").onclick=()=>{
+  const blob=new Blob([JSON.stringify(pack(),null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download="hamsafar-backup.json";a.click();
+  document.getElementById("msg").textContent="فایل ساخته شد";
+};
+document.getElementById("inn").onclick=()=>{
+  const f=document.getElementById("file").files[0];
+  if(!f) return document.getElementById("msg").textContent="فایل انتخاب نشده";
+  const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);keys.forEach(k=>{if(o[k]!=null) localStorage.setItem(k,o[k]);});document.getElementById("msg").textContent="بازگشت";}catch{document.getElementById("msg").textContent="فایل نامعتبر";}};
+  r.readAsText(f);
+};
+</script>
+</body></html>
