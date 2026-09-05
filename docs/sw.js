@@ -1,4 +1,4 @@
-const CACHE="hamsafar-037";
-const FILES=["./index.html","./styles.css","./more.html","./about.html","./status.html","./contacts.html","./night.html","./roads.html","./seasons.html","./season-guide.html","./peak.html","./stops.html","./trip.html","./checklist.html","./journal.html","./fuel.html","./expense.html","./speed.html","./family.html","./map.html","./sos.html","./numbers.html","./security.html","./plans.html","./offline-vault.js"];
+const CACHE="hamsafar-038";
+const FILES=["./index.html","./styles.css","./more.html","./about.html","./status.html","./backup.html","./contacts.html","./night.html","./roads.html","./seasons.html","./season-guide.html","./peak.html","./stops.html","./trip.html","./checklist.html","./journal.html","./fuel.html","./expense.html","./speed.html","./family.html","./map.html","./sos.html","./numbers.html","./security.html","./plans.html","./offline-vault.js"];
 self.addEventListener("install",e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES))));
 self.addEventListener("fetch",e=>{e.respondWith(caches.match(e.request).then(hit=>hit||fetch(e.request).then(res=>{const copy=res.clone();caches.open(CACHE).then(c=>c.put(e.request,copy)).catch(()=>{});return res;}).catch(()=>caches.match("./index.html"))));});
