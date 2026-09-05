@@ -8,26 +8,35 @@
     main { max-width: 900px; margin: auto; padding: 28px 16px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
     .card { background: #111827; padding: 16px; border-radius: 14px; }
-    .ok { color: #4ade80; }
+    pre { white-space: pre-wrap; background: #0b1220; padding: 12px; border-radius: 12px; }
+    a { color: #86efac; }
   </style>
 </head>
 <body>
   <main>
     <h1>مرکز کنترل مولیدو</h1>
-    <p>نسخه محلی — بدون سرور ابری</p>
-    <div class="grid">
-      <div class="card">فاز 000 <div class="ok">PASS</div></div>
-      <div class="card">فاز 001 <div class="ok">PASS</div></div>
-      <div class="card">فاز 002 <div class="ok">PASS</div></div>
-      <div class="card">فاز 003 <div class="ok">PASS</div></div>
-      <div class="card">فاز 004 <div class="ok">PASS</div></div>
-      <div class="card">فاز 005 <div class="ok">PASS</div></div>
-      <div class="card">فاز 006 <div class="ok">PASS</div></div>
-    </div>
+    <p>نسخه محلی — داده زنده از API</p>
+    <p><a href="/">بازگشت به اپ</a></p>
+    <div class="grid" id="cards"></div>
     <div class="card" style="margin-top:16px">
-      <p>دامنه بعدی: hamsafa.molido.shop</p>
-      <p>API محلی: http://127.0.0.1:8080/health</p>
+      <button onclick="loadLive()">بارگذاری وضعیت زنده</button>
+      <pre id="out">/health</pre>
     </div>
   </main>
+  <script>
+    async function loadLive() {
+      const out = document.getElementById("out");
+      const cards = document.getElementById("cards");
+      try {
+        const health = await fetch("/health").then((r) => r.json());
+        const editions = await fetch("/editions").then((r) => r.json());
+        cards.innerHTML = editions.map((e) => `<div class="card"><b>${e.nameFa}</b><div>${e.priceMonthlyIrr.toLocaleString("fa-IR")} ریال</div><div>${e.priceMonthlyUsd} دلار</div></div>`).join("");
+        out.textContent = JSON.stringify(health, null, 2);
+      } catch (e) {
+        out.textContent = "API در دسترس نیست";
+      }
+    }
+    loadLive();
+  </script>
 </body>
 </html>
