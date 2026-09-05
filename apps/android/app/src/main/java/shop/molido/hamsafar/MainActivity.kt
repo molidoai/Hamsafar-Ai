@@ -7,6 +7,7 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
   @SuppressLint("SetJavaScriptEnabled")
@@ -25,6 +26,12 @@ class MainActivity : AppCompatActivity() {
         callback?.invoke(origin, true, false)
       }
     }
-    view.loadUrl("https://molidoai.github.io/Hamsafar-Ai/more.html")
+    val home = "https://molidoai.github.io/Hamsafar-Ai/more.html"
+    val bump = "https://molidoai.github.io/Hamsafar-Ai/update.html"
+    view.loadUrl(home)
+    thread {
+      val newer = try { UpdateGate.hasNewer() } catch (_: Exception) { false }
+      if (newer) runOnUiThread { view.loadUrl(bump) }
+    }
   }
 }
