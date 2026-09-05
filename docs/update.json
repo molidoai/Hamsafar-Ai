@@ -6,5 +6,7 @@
   "signing": ["v2", "v3"],
   "web": "https://molidoai.github.io/Hamsafar-Ai/more.html",
   "apk": null,
-  "notes": "APK file not published yet. Web preview is current."
+  "apkSha256": null,
+  "certSha256": null,
+  "notes": "Fill apkSha256 and certSha256 after first signed release. Never commit the keystore."
 }
