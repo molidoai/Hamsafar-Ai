@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><title>تماس</title><link rel="stylesheet" href="./styles.css"/></head>
+<body>
+<main class="wrap">
+<div class="top"><span class="brand">MOLIDO</span><span class="ver">تماس</span></div>
+<h1>افراد معتمد</h1>
+<input id="name" class="card" placeholder="نام" style="width:100%;margin-bottom:8px"/>
+<input id="tel" class="card" placeholder="شماره" style="width:100%;margin-bottom:8px"/>
+<button class="btn" id="add" type="button">ذخیره</button>
+<div id="out"></div>
+</main>
+<nav class="dock"><a href="./sos.html">SOS</a><a class="active" href="./contacts.html">تماس</a><a href="./more.html">بیشتر</a></nav>
+<script>
+const key="hamsafar_contacts";
+function draw(){const rows=JSON.parse(localStorage.getItem(key)||"[]");document.getElementById("out").innerHTML=rows.map(r=>`<article class="card" style="margin-top:8px"><b>${r.name}</b><p><a href="tel:${r.tel}">${r.tel}</a></p></article>`).join("")||"<p class=lead>تماسی نیست</p>";}
+document.getElementById("add").onclick=()=>{const name=document.getElementById("name").value.trim();const tel=document.getElementById("tel").value.trim();if(!name||!tel)return;const rows=JSON.parse(localStorage.getItem(key)||"[]");rows.push({name,tel});localStorage.setItem(key,JSON.stringify(rows.slice(0,12)));document.getElementById("name").value="";document.getElementById("tel").value="";draw();};
+draw();
+</script>
+</body></html>
