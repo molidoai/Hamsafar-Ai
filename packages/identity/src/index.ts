@@ -1,3 +1,6 @@
+import { createHash, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { loadJson, saveJson } from "../../storage/src";
+
 export interface Session {
   token: string;
   userId: string;
@@ -5,21 +8,55 @@ export interface Session {
   expiresAt: number;
 }
 
-const users = new Map<string, { id: string; email: string; password: string }>();
+type User = {
+  id: string;
+  email: string;
+  passwordHash: string;
+  salt: string;
+  edition: "personal" | "family" | "pro";
+};
+
+const STORE = "data/users.json";
+const users = new Map<string, User>(loadJson<User[]>(STORE, []).map((u) => [u.id, u]));
 const sessions = new Map<string, Session>();
+
+function persistUsers() {
+  saveJson(STORE, [...users.values()]);
+}
+
+function hashPassword(password: string, salt: string): string {
+  return scryptSync(password, salt, 32).toString("hex");
+}
+
+function hashesMatch(a: string, b: string): boolean {
+  const left = Buffer.from(a, "hex");
+  const right = Buffer.from(b, "hex");
+  if (left.length !== right.length) return false;
+  return timingSafeEqual(left, right);
+}
 
 export function register(email: string, password: string) {
   if (!email.includes("@") || password.length < 8) throw new Error("INVALID_CREDENTIALS");
   if ([...users.values()].some((u) => u.email === email)) throw new Error("EMAIL_EXISTS");
-  const user = { id: `user_${users.size + 1}`, email, password };
+  const salt = randomBytes(16).toString("hex");
+  const user: User = {
+    id: `user_${users.size + 1}`,
+    email,
+    salt,
+    passwordHash: hashPassword(password, salt),
+    edition: "personal",
+  };
   users.set(user.id, user);
-  return { id: user.id, email: user.email };
+  persistUsers();
+  return { id: user.id, email: user.email, edition: user.edition };
 }
 
 export function login(email: string, password: string, deviceId = "device_local") {
-  const user = [...users.values()].find((u) => u.email === email && u.password === password);
-  if (!user) throw new Error("LOGIN_FAILED");
-  const token = `tok_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const user = [...users.values()].find((u) => u.email === email);
+  if (!user || !hashesMatch(user.passwordHash, hashPassword(password, user.salt))) {
+    throw new Error("LOGIN_FAILED");
+  }
+  const token = `tok_${createHash("sha256").update(randomBytes(24)).digest("hex").slice(0, 32)}`;
   const session: Session = {
     token,
     userId: user.id,
@@ -35,4 +72,20 @@ export function requireSession(token?: string): Session {
   const session = sessions.get(token);
   if (!session || session.expiresAt < Date.now()) throw new Error("UNAUTHENTICATED");
   return session;
+}
+
+export function logout(token?: string): void {
+  if (token) sessions.delete(token);
+}
+
+export function setEdition(userId: string, edition: User["edition"]) {
+  const user = users.get(userId);
+  if (!user) throw new Error("USER_NOT_FOUND");
+  user.edition = edition;
+  persistUsers();
+  return { userId, edition };
+}
+
+export function getEditionForUser(userId: string): User["edition"] {
+  return users.get(userId)?.edition ?? "personal";
 }
