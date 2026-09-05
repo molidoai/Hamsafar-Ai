@@ -1,0 +1,10 @@
+{
+  "applicationId": "shop.molido.hamsafar",
+  "versionName": "0.3.1",
+  "versionCode": 31,
+  "minSdk": 24,
+  "signing": ["v2", "v3"],
+  "web": "https://molidoai.github.io/Hamsafar-Ai/more.html",
+  "apk": null,
+  "notes": "APK file not published yet. Web preview is current."
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>به‌روزرسانی</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">به‌روز</span></div>
+  <h1>نسخه منتشر</h1>
+  <pre id="out" class="card" style="white-space:pre-wrap"></pre>
+</main>
+<nav class="dock">
+  <a href="./more.html">بیشتر</a>
+  <a class="active" href="./update.html">به‌روز</a>
+  <a href="./about.html">درباره</a>
+</nav>
+<script>
+fetch("./update.json").then(r=>r.json()).then(j=>{
+  document.getElementById("out").textContent =
+    "نسخه "+j.versionName+"\nکد "+j.versionCode+"\nامضا "+(j.signing||[]).join(",")+"\nAPK "+(j.apk||"منتشر نیست");
+}).catch(()=>document.getElementById("out").textContent="مانیفست خوانده نشد");
+</script>
+</body></html>
