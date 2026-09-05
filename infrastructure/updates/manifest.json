@@ -1,24 +1,18 @@
 {
   "app": "molido-hamsafar",
-  "latest": "0.3.0",
+  "latest": "0.3.1",
   "minSupported": "0.1.0",
   "channel": "github",
-  "notes": "منبع نسخه گیت‌هاب است. هاست و دامنه لازم نیست.",
+  "notes": "اجرای ویندوز بدون bash",
   "releasedAt": "2026-09-05",
   "signature": {
     "algorithm": "SHA256-MANIFEST",
     "keyId": "molido-release-dev",
-    "value": "sig_dev_phase028"
+    "value": "sig_dev_phase029"
   },
   "artifacts": {
-    "android": {
-      "url": "https://github.com/molidoai/Hamsafar-Ai/releases",
-      "sha256": "pending-first-signed-apk",
-      "signed": true,
-      "required": false
-    },
     "web": {
-      "url": "https://github.com/molidoai/Hamsafar-Ai/tree/main/apps/web",
+      "url": "https://molidoai.github.io/Hamsafar-Ai/",
       "sha256": "pending",
       "signed": false,
       "required": false
