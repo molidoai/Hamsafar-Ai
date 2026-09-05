@@ -3,23 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>مولیدو همسفر ۰٫۳٫۱</title>
+  <title>مولیدو همسفر</title>
   <style>
-    body { font-family: Tahoma, sans-serif; background:#020617; color:#e2e8f0; margin:0; }
-    main { max-width:640px; margin:auto; padding:32px 16px; }
-    a { color:#86efac; }
-    .card { background:#111827; padding:14px; border-radius:14px; margin:10px 0; }
+    :root { --bg:#07070c; --ink:#eef2ff; --muted:#8b93a7; --cyan:#22d3ee; --card:#111827; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Tahoma, sans-serif; background:var(--bg); color:var(--ink); }
+    main { max-width:720px; margin:auto; padding:28px 16px 64px; }
+    h1 { font-size:28px; margin:0 0 8px; }
+    p { color:var(--muted); }
+    .grid { display:grid; gap:12px; }
+    @media (min-width:640px) { .plans { grid-template-columns: repeat(3,1fr); } .places { grid-template-columns:1fr 1fr; } }
+    .card { background:var(--card); border-radius:16px; padding:16px; }
+    .card h3 { margin:0 0 8px; }
+    .price { color:var(--cyan); font-weight:700; }
+    a { color:var(--cyan); }
   </style>
 </head>
 <body>
   <main>
     <h1>مولیدو همسفر</h1>
-    <p>نسخه ۰٫۳٫۱ — ۱۲ مقصد</p>
-    <div class="card">تهران • اصفهان • شیراز • مشهد</div>
-    <div class="card">تبریز • یزد • کیش • رشت • کرمان</div>
-    <div class="card">استانبول • دبی • باکو</div>
-    <p>اپ کامل بعدا با Node روی ویندوز. این صفحه بدون نصب کار می‌کند.</p>
-    <p><a href="https://github.com/molidoai/Hamsafar-Ai">مخزن</a></p>
+    <p>سفر هوشمند آفلاین — نسخه ۰٫۳٫۱</p>
+    <section class="grid plans">
+      <article class="card"><h3>پایه</h3><div class="price">رایگان</div><p>سفر، مقصد، سرعت، آفلاین</p></article>
+      <article class="card"><h3>خانواده</h3><div class="price">۶ $‌ / ۲٫۹ م ریال</div><p>گروه و SOS</p></article>
+      <article class="card"><h3>حرفه‌ای</h3><div class="price">۱۹ $‌ / ۹٫۹ م ریال</div><p>دستیار مسیر</p></article>
+    </section>
+    <h2>مقصدها</h2>
+    <section class="grid places">
+      <article class="card">تهران</article>
+      <article class="card">اصفهان</article>
+      <article class="card">شیراز</article>
+      <article class="card">مشهد</article>
+      <article class="card">تبریز</article>
+      <article class="card">یزد</article>
+      <article class="card">کیش</article>
+      <article class="card">رشت</article>
+      <article class="card">کرمان</article>
+      <article class="card">استانبول</article>
+      <article class="card">دبی</article>
+      <article class="card">باکو</article>
+    </section>
+    <p>پرداخت و نقشه زنده هنوز نیست. کد کامل روی گیت‌هاب است.</p>
+    <p><a href="https://github.com/molidoai/Hamsafar-Ai">github.com/molidoai/Hamsafar-Ai</a></p>
   </main>
 </body>
 </html>
