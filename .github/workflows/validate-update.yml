@@ -1,0 +1,22 @@
+name: validate-update-manifest
+on:
+  push:
+    paths:
+      - "docs/update.json"
+      - ".github/workflows/validate-update.yml"
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require version fields
+        run: |
+          python3 - <<'PY'
+          import json
+          j=json.load(open("docs/update.json"))
+          assert j.get("applicationId")=="shop.molido.hamsafar"
+          assert int(j.get("versionCode",0))>=31
+          assert j.get("versionName")
+          print("ok", j["versionName"], j["versionCode"], "apk=", j.get("apk"))
+          PY

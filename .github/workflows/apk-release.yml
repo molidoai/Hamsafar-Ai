@@ -1,0 +1,18 @@
+name: apk-release
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "apk-*"
+jobs:
+  note:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Guard
+        run: |
+          if [ ! -f apps/android/gradlew ]; then
+            echo "Gradle wrapper missing. Open apps/android in Android Studio first."
+            echo "Do not put the keystore in git. Add SIGNING_KEY secret later."
+            exit 1
+          fi
