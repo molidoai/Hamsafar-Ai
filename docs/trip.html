@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>سفر همسفر</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">سفر</span></div>
+  <h1>یک مسیر انتخاب کنید</h1>
+  <p class="lead">این فهرست محلی است. سفر روی همین گوشی ثبت می‌شود، نه روی سرور.</p>
+  <label class="lead" for="from">مبدأ</label>
+  <select id="from" class="card" style="width:100%;margin-bottom:10px"></select>
+  <label class="lead" for="to">مقصد</label>
+  <select id="to" class="card" style="width:100%;margin-bottom:16px"></select>
+  <button class="btn" id="go" type="button">ساخت سفر</button>
+  <div id="out" class="card" style="margin-top:16px">هنوز سفری نیست</div>
+</main>
+<nav class="dock">
+  <a href="./index.html">خانه</a>
+  <a class="active" href="./trip.html">سفر</a>
+  <a href="./map.html">نقشه</a>
+  <a href="./sos.html">SOS</a>
+</nav>
+<script>
+const cities = ["تهران","اصفهان","شیراز","مشهد","تبریز","رشت","یزد","کیش","قشم","اهواز","کرمان","بندرعباس","کاشان","همدان","ارومیه"];
+const from = document.getElementById("from");
+const to = document.getElementById("to");
+cities.forEach((c,i) => {
+  from.innerHTML += `<option>${c}</option>`;
+  to.innerHTML += `<option ${i===1?"selected":""}>${c}</option>`;
+});
+document.getElementById("go").onclick = () => {
+  const trip = { id: "t-" + Date.now(), from: from.value, to: to.value, at: new Date().toISOString() };
+  const list = JSON.parse(localStorage.getItem("hamsafar_trips") || "[]");
+  list.unshift(trip);
+  localStorage.setItem("hamsafar_trips", JSON.stringify(list.slice(0,20)));
+  document.getElementById("out").innerHTML = list.map(t => `<div><b>${t.from} — ${t.to}</b><p>${new Date(t.at).toLocaleString("fa-IR")}</p></div>`).join("");
+};
+document.getElementById("go").click();
+</script>
+</body></html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>SOS همسفر</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">SOS</span></div>
+  <h1>هشدار اضطراری</h1>
+  <p class="lead">این صفحه روی خود گوشی ریز ثبت می‌کند. پیامک واقعی به پلیس نمی‌رود تا نسخه خانواده و سرور فعال شود.</p>
+  <button class="btn" id="sos" type="button">ثبت SOS محلی</button>
+  <div id="out" class="card" style="margin-top:16px">هنوز ریزی نیست</div>
+</main>
+<nav class="dock">
+  <a href="./index.html">خانه</a>
+  <a href="./trip.html">سفر</a>
+  <a href="./map.html">نقشه</a>
+  <a class="active" href="./sos.html">SOS</a>
+</nav>
+<script>
+function render() {
+  const rows = JSON.parse(localStorage.getItem("hamsafar_sos") || "[]");
+  document.getElementById("out").innerHTML = rows.length
+    ? rows.map(r => `<div><b>${r.id}</b><p>${r.lat}, ${r.lng}<br>${new Date(r.at).toLocaleString("fa-IR")}</p></div>`).join("")
+    : "هنوز ریزی نیست";
+}
+document.getElementById("sos").onclick = () => {
+  const save = (lat, lng) => {
+    const rows = JSON.parse(localStorage.getItem("hamsafar_sos") || "[]");
+    rows.unshift({ id: "sos-" + Date.now(), lat, lng, at: new Date().toISOString() });
+    localStorage.setItem("hamsafar_sos", JSON.stringify(rows.slice(0,20)));
+    render();
+  };
+  if (!navigator.geolocation) return save("?،", "?");
+  navigator.geolocation.getCurrentPosition(
+    p => save(p.coords.latitude.toFixed(4), p.coords.longitude.toFixed(4)),
+    () => save("denied", "denied")
+  );
+};
+render();
+</script>
+</body></html>
