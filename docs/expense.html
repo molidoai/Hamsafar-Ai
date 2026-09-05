@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>هزینه سفر</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+<div class="top"><span class="brand">MOLIDO</span><span class="ver">هزینه</span></div>
+<h1>هزینه‌های مسیر</h1>
+<input id="title" class="card" placeholder="عنوان" style="width:100%;margin-bottom:8px"/>
+<input id="amt" type="number" class="card" placeholder="مبلغ ریال" style="width:100%;margin-bottom:8px"/>
+<button class="btn" id="add" type="button">افزودن</button>
+<div id="sum" class="card" style="margin-top:12px"></div>
+<div id="out"></div>
+</main>
+<nav class="dock"><a href="./trip.html">سفر</a><a class="active" href="./expense.html">هزینه</a><a href="./more.html">بیشتر</a></nav>
+<script>
+const key="hamsafar_exp";
+function draw(){
+ const rows=JSON.parse(localStorage.getItem(key)||"[]");
+ const tot=rows.reduce((s,r)=>s+(+r.amt||0),0);
+ document.getElementById("sum").textContent="جمع: "+tot.toLocaleString("fa-IR")+" ریال";
+ document.getElementById("out").innerHTML=rows.map(r=>`<article class="card" style="margin-top:8px"><b>${r.title}</b><p>${(+r.amt).toLocaleString("fa-IR")}</p></article>`).join("");
+}
+document.getElementById("add").onclick=()=>{
+ const title=document.getElementById("title").value.trim();
+ const amt=+document.getElementById("amt").value;
+ if(!title||!amt) return;
+ const rows=JSON.parse(localStorage.getItem(key)||"[]");
+ rows.unshift({title,amt,at:Date.now()});
+ localStorage.setItem(key,JSON.stringify(rows.slice(0,80)));
+ document.getElementById("title").value=""; document.getElementById("amt").value="";
+ draw();
+};
+draw();
+</script>
+</body></html>
