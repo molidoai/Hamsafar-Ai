@@ -1,56 +1,16 @@
 {
   "places": [
-    {
-      "id": "ir-teh",
-      "country": "Iran",
-      "city": "Tehran",
-      "name": "تهران",
-      "lat": 35.6892,
-      "lng": 51.389,
-      "freshness": "aging",
-      "confidence": 0.72,
-      "source": "seed-catalog",
-      "safety": "urban",
-      "tags": ["capital", "transit"]
-    },
-    {
-      "id": "ir-isf",
-      "country": "Iran",
-      "city": "Isfahan",
-      "name": "اصفهان",
-      "lat": 32.6546,
-      "lng": 51.668,
-      "freshness": "fresh",
-      "confidence": 0.8,
-      "source": "seed-catalog",
-      "safety": "urban",
-      "tags": ["heritage", "tourism"]
-    },
-    {
-      "id": "ir-shz",
-      "country": "Iran",
-      "city": "Shiraz",
-      "name": "شیراز",
-      "lat": 29.5918,
-      "lng": 52.5836,
-      "freshness": "fresh",
-      "confidence": 0.78,
-      "source": "seed-catalog",
-      "safety": "urban",
-      "tags": ["heritage", "garden"]
-    },
-    {
-      "id": "tr-ist",
-      "country": "Turkey",
-      "city": "Istanbul",
-      "name": "استانبول",
-      "lat": 41.0082,
-      "lng": 28.9784,
-      "freshness": "aging",
-      "confidence": 0.7,
-      "source": "seed-catalog",
-      "safety": "urban",
-      "tags": ["transit", "tourism"]
-    }
+    {"id":"ir-teh","country":"Iran","city":"Tehran","name":"تهران","lat":35.6892,"lng":51.389,"freshness":"aging","confidence":0.72,"source":"seed-catalog","safety":"urban","tags":["capital","transit"]},
+    {"id":"ir-isf","country":"Iran","city":"Isfahan","name":"اصفهان","lat":32.6546,"lng":51.668,"freshness":"fresh","confidence":0.8,"source":"seed-catalog","safety":"urban","tags":["heritage","tourism"]},
+    {"id":"ir-shz","country":"Iran","city":"Shiraz","name":"شیراز","lat":29.5918,"lng":52.5836,"freshness":"fresh","confidence":0.78,"source":"seed-catalog","safety":"urban","tags":["heritage","garden"]},
+    {"id":"ir-mhd","country":"Iran","city":"Mashhad","name":"مشهد","lat":36.2605,"lng":59.6168,"freshness":"fresh","confidence":0.77,"source":"seed-catalog","safety":"urban","tags":["pilgrimage","transit"]},
+    {"id":"ir-tbz","country":"Iran","city":"Tabriz","name":"تبریز","lat":38.0962,"lng":46.2738,"freshness":"aging","confidence":0.68,"source":"seed-catalog","safety":"urban","tags":["bazaar","heritage"]},
+    {"id":"ir-yzd","country":"Iran","city":"Yazd","name":"یزد","lat":31.8974,"lng":54.3569,"freshness":"fresh","confidence":0.8,"source":"seed-catalog","safety":"urban","tags":["heritage","desert"]},
+    {"id":"ir-ksh","country":"Iran","city":"Kish","name":"کیش","lat":26.5578,"lng":53.9802,"freshness":"fresh","confidence":0.76,"source":"seed-catalog","safety":"island","tags":["island","tourism"]},
+    {"id":"ir-rst","country":"Iran","city":"Rasht","name":"رشت","lat":37.2808,"lng":49.5832,"freshness":"aging","confidence":0.7,"source":"seed-catalog","safety":"urban","tags":["north","food"]},
+    {"id":"ir-krm","country":"Iran","city":"Kerman","name":"کرمان","lat":30.2839,"lng":57.0834,"freshness":"aging","confidence":0.69,"source":"seed-catalog","safety":"urban","tags":["desert","heritage"]},
+    {"id":"tr-ist","country":"Turkey","city":"Istanbul","name":"استانبول","lat":41.0082,"lng":28.9784,"freshness":"aging","confidence":0.7,"source":"seed-catalog","safety":"urban","tags":["transit","tourism"]},
+    {"id":"ae-dxb","country":"UAE","city":"Dubai","name":"دبی","lat":25.2048,"lng":55.2708,"freshness":"fresh","confidence":0.74,"source":"seed-catalog","safety":"urban","tags":["transit","tourism"]},
+    {"id":"az-bak","country":"Azerbaijan","city":"Baku","name":"باکو","lat":40.4093,"lng":49.8671,"freshness":"fresh","confidence":0.73,"source":"seed-catalog","safety":"urban","tags":["transit","tourism"]}
   ]
 }
