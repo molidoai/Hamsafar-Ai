@@ -8,35 +8,57 @@
 </head>
 <body>
   <header>
-    <h1>مولیدو همسفر</h1>
-    <p>نسخه تست محلی • بدون هاست</p>
-    <p id="updateBanner">در حال بررسی به‌روزرسانی...</p>
+    <h1>مولیدو همسفر 0.3.0</h1>
+    <p>تست محلی • بدون هاست • <a href="/admin" style="color:#86efac">مرکز کنترل</a></p>
+    <p id="updateBanner">بررسی به‌روزرسانی...</p>
   </header>
   <nav>
+    <button onclick="show('plans'); loadPlans()">نسخه‌ها</button>
+    <button onclick="show('orders'); loadOrders()">سفارش‌ها</button>
     <button onclick="show('home')">خانه</button>
+    <button onclick="show('trips'); loadTrips()">سفرها</button>
     <button onclick="show('dest')">مقصد</button>
+    <button onclick="show('safety')">ایمنی</button>
     <button onclick="show('sos')">اضطراری</button>
+    <button onclick="show('pro')">حرفه‌ای</button>
     <button onclick="show('status')">وضعیت</button>
   </nav>
   <main>
+    <section id="plans" class="page hidden"><div id="planGrid" class="plans"></div></section>
+    <section id="orders" class="page hidden">
+      <button class="primary" onclick="loadOrders()">بارگذاری سفارش‌ها</button>
+      <p id="orderSummary"></p>
+      <div id="orderList"></div>
+    </section>
     <section id="home" class="page">
       <input id="email" value="demo@molido.shop" />
-      <input id="password" type="password" value="secret123" />
+      <input id="password" type="password" placeholder="حداقل ۸ کاراکتر" />
       <button class="primary" onclick="loginAndTrip()">ورود و ساخت سفر</button>
-      <p id="homeOut">برای تست، اول API محلی را روشن کنید.</p>
+      <p id="currentPlan">نسخه فعال: نامشخص</p>
+      <p id="homeOut">API محلی: http://127.0.0.1:8080</p>
     </section>
+    <section id="trips" class="page hidden"><div id="tripList"></div></section>
     <section id="dest" class="page hidden">
       <input id="q" value="اصفهان" />
       <button class="primary" onclick="searchDest()">جستجو</button>
       <div id="places"></div>
     </section>
+    <section id="safety" class="page hidden">
+      <input id="speed" type="number" value="120" />
+      <input id="limit" type="number" value="100" />
+      <button class="primary" onclick="checkSpeed()">بررسی سرعت</button>
+      <p id="speedOut"></p>
+    </section>
     <section id="sos" class="page hidden">
-      <p>ارسال آزمایشی SOS برای مخاطب مطمئن.</p>
       <button class="danger" onclick="sendSos()">ارسال SOS</button>
       <p id="sosOut"></p>
     </section>
+    <section id="pro" class="page hidden">
+      <button class="primary" onclick="suggestPro()">پیشنهاد مسیر</button>
+      <p id="aiOut"></p>
+    </section>
     <section id="status" class="page hidden">
-      <button class="primary" onclick="loadHealth()">بررسی سلامت</button>
+      <button class="primary" onclick="loadHealth()">سلامت</button>
       <pre id="healthOut"></pre>
     </section>
   </main>
