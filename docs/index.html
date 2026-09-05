@@ -1,36 +1,42 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>مولیدو همسفر — ایران</title>
-<style>
-body{margin:0;font-family:Tahoma,sans-serif;background:#07070c;color:#eef2ff}
-main{max-width:720px;margin:auto;padding:24px 16px 64px}
-.card{background:#111827;border-radius:14px;padding:12px;margin:8px 0}
-.price{color:#22d3ee}
-a{color:#22d3ee}
-.places{display:flex;flex-wrap:wrap;gap:8px}
-.places span{background:#111827;padding:8px 10px;border-radius:999px}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>مولیدو همسفر</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-<main>
-<h1>مولیدو همسفر</h1>
-<p>۳۱ استان + کیش قشم کاشان — ۳۴ مقصد</p>
-<div class="card"><b>پایه</b> رایگان</div>
-<div class="card"><b>خانواده</b> <span class="price">۶ $ / ۲٫۹ م ریال</span></div>
-<div class="card"><b>حرفه‌ای</b> <span class="price">۱۹ $ / ۹٫۹ م ریال</span></div>
-<h2>ایران</h2>
-<div class="places">
-<span>تهران</span><span>کرج</span><span>قم</span><span>اراک</span><span>قزوین</span><span>زنجان</span><span>همدان</span><span>کرمانشاه</span><span>سنندج</span><span>ایلام</span><span>خرم‌آباد</span><span>اهواز</span><span>شهرکرد</span><span>یاسوج</span><span>اصفهان</span><span>کاشان</span><span>یزد</span><span>شیراز</span><span>بوشهر</span><span>بندرعباس</span><span>کیش</span><span>قشم</span><span>کرمان</span><span>زاهدان</span><span>بیرجند</span><span>مشهد</span><span>بجنورد</span><span>سمنان</span><span>گرگان</span><span>ساری</span><span>رشت</span><span>اردبیل</span><span>تبریز</span><span>ارومیه</span>
-</div>
-<h2>مسیرهای آماده</h2>
-<div class="card">تهران — اصفهان ۴۴۰ کیلومتر</div>
-<div class="card">تهران — مشهد ۸۹۰ کیلومتر</div>
-<div class="card">تهران — تبریز ۶۳۰ کیلومتر</div>
-<div class="card">تهران — رشت ۳۳۰ کیلومتر</div>
-<div class="card">تهران — شیراز ۹۳۰ کیلومتر</div>
-<p><a href="https://github.com/molidoai/Hamsafar-Ai">مخزن گیت‌هاب</a></p>
-</main>
-</body></html>
+  <main class="wrap">
+    <div class="top"><span class="brand">MOLIDO</span><span class="ver">همسفر ۰٫۳٫۱</span></div>
+    <h1>سفر را آرام و آفلاین حفظ کنید</h1>
+    <p class="lead">سه نسخه فروش، ۳۱ استان ایران، نقشه و مسیرهای آماده. پرداخت زنده هنوز نیست.</p>
+    <div class="actions">
+      <a class="btn" href="./map.html">نقشه زنده</a>
+      <a class="btn ghost" href="https://github.com/molidoai/Hamsafar-Ai">مخزن</a>
+    </div>
+    <h2>نسخه‌ها</h2>
+    <section class="row plans">
+      <article class="card"><h3>پایه</h3><div class="price">رایگان</div><p>سفر، مقصد، هشدار سرعت، کاتالوگ آفلاین</p></article>
+      <article class="card"><h3>خانواده</h3><div class="price">۶ دلار · ۲٫۹ م ریال</div><p>گروه خانوادگی و هشدار SOS</p></article>
+      <article class="card"><h3>حرفه‌ای</h3><div class="price">۱۹ دلار · ۹٫۹ م ریال</div><p>دستیار مسیر و سقف بالاتر</p></article>
+    </section>
+    <h2>مسیرها</h2>
+    <section class="row routes">
+      <article class="card"><h3>تهران — اصفهان</h3><p>۴۴۰ کیلومتر · قم، کاشان</p></article>
+      <article class="card"><h3>تهران — مشهد</h3><p>۸۹۰ کیلومتر · سمنان</p></article>
+      <article class="card"><h3>تهران — تبریز</h3><p>۶۳۰ کیلومتر · قزوین، زنجان</p></article>
+      <article class="card"><h3>تهران — رشت</h3><p>۳۳۰ کیلومتر · شمال</p></article>
+    </section>
+    <h2>ایران</h2>
+    <div class="places">
+      <span>تهران</span><span>کرج</span><span>قم</span><span>اراک</span><span>قزوین</span><span>زنجان</span><span>همدان</span><span>کرمانشاه</span><span>سنندج</span><span>ایلام</span><span>خرم‌آباد</span><span>اهواز</span><span>شهرکرد</span><span>یاسوج</span><span>اصفهان</span><span>کاشان</span><span>یزد</span><span>شیراز</span><span>بوشهر</span><span>بندرعباس</span><span>کیش</span><span>قشم</span><span>کرمان</span><span>زاهدان</span><span>بیرجند</span><span>مشهد</span><span>بجنورد</span><span>سمنان</span><span>گرگان</span><span>ساری</span><span>رشت</span><span>اردبیل</span><span>تبریز</span><span>ارومیه</span>
+    </div>
+  </main>
+  <nav class="dock">
+    <a class="active" href="./index.html">خانه</a>
+    <a href="./map.html">نقشه</a>
+    <a href="https://github.com/molidoai/Hamsafar-Ai">کد</a>
+  </nav>
+</body>
+</html>
