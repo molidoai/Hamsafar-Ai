@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>امنیت آفلاین</title>
+<link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">امنیت</span></div>
+  <h1>حفظ داده آفلاین</h1>
+  <p class="lead">سفر، SOS و گروه روی خود گوشی است. با PIN با AES-GCM رمز می‌شود. کلید روی سرور نیست.</p>
+  <div class="card">PIN جدید<input id="pin" type="password" inputmode="numeric" style="width:100%;margin:8px 0;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
+  <div class="actions">
+    <button class="btn" id="lock" type="button">قفل کردن</button>
+    <button class="btn ghost" id="unlock" type="button">باز کردن</button>
+    <button class="btn ghost" id="wipe" type="button">پاک کردن همه</button>
+  </div>
+  <div id="out" class="card">وضعیت خزانه اینجاست</div>
+  <p class="lead">محدودیت: اگر گوشی رابط شود و PIN نداشته باشد داده قابل خواندن است. اگر PIN را فراموش کنید بازیابی نیست.</p>
+</main>
+<nav class="dock">
+  <a href="./index.html">خانه</a>
+  <a class="active" href="./security.html">امنیت</a>
+  <a href="./trip.html">سفر</a>
+  <a href="./sos.html">SOS</a>
+</nav>
+<script type="module">
+import { lockVault, unlockVault } from "./offline-vault.js";
+const out = document.getElementById("out");
+document.getElementById("lock").onclick = async () => {
+  const pin = document.getElementById("pin").value;
+  if (pin.length < 4) return out.textContent = "PIN حداقل ۴ رقم";
+  const data = {
+    trips: JSON.parse(localStorage.getItem("hamsafar_trips") || "[]"),
+    sos: JSON.parse(localStorage.getItem("hamsafar_sos") || "[]"),
+    family: JSON.parse(localStorage.getItem("hamsafar_family") || "[]"),
+    edition: JSON.parse(localStorage.getItem("hamsafar_edition") || "null")
+  };
+  await lockVault(pin, data);
+  out.textContent = "قفل شد. نسخه روش پاک شد.";
+};
+document.getElementById("unlock").onclick = async () => {
+  try {
+    const data = await unlockVault(document.getElementById("pin").value);
+    if (!data) return out.textContent = "خزانه‌ای نیست";
+    localStorage.setItem("hamsafar_trips", JSON.stringify(data.trips || []));
+    localStorage.setItem("hamsafar_sos", JSON.stringify(data.sos || []));
+    localStorage.setItem("hamsafar_family", JSON.stringify(data.family || []));
+    if (data.edition) localStorage.setItem("hamsafar_edition", JSON.stringify(data.edition));
+    out.textContent = "باز شد.";
+  } catch {
+    out.textContent = "PIN غلط یا داده خراب است";
+  }
+};
+document.getElementById("wipe").onclick = () => {
+  ["hamsafar_trips","hamsafar_sos","hamsafar_family","hamsafar_edition","hamsafar_vault","hamsafar_vault_salt"].forEach(k => localStorage.removeItem(k));
+  out.textContent = "همه پاک شد";
+};
+</script>
+</body></html>
