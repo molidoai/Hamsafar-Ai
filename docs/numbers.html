@@ -1,20 +1,31 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>شماره اضطراری</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>شماره‌ها</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">اضطراری</span></div>
-<h1>شماره‌های ثابت</h1>
-<p class="lead">تماس مستقیم با خود گوشی. این همسفر جایگزین پلیس نیست.</p>
-<div class="card"><a href="tel:110">۱۱۰ پلیس</a></div>
-<div class="card"><a href="tel:115">۱۱۵ اورژانس</a></div>
-<div class="card"><a href="tel:125">۱۲۵ آتش‌نشانی</a></div>
-<div class="card"><a href="tel:112">۱۱۲ هلال احمر</a></div>
-<div class="card"><a href="./sos.html">SOS محلی همسفر</a></div>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">تماس</span></div>
+  <h1>شماره ضروری</h1>
+  <article class="card"><p><a href="tel:110">۱۱۰ پلیس</a></p></article>
+  <article class="card" style="margin-top:8px"><p><a href="tel:115">۱۱۵ اورژانس</a></p></article>
+  <article class="card" style="margin-top:8px"><p><a href="tel:125">۱۲۵ آتش‌نشانی</a></p></article>
+  <article class="card" style="margin-top:8px"><p><a href="tel:112">۱۱۲ اضطراری</a></p></article>
+  <h2>تماس شخصی</h2>
+  <input id="name" class="card" placeholder="نام" style="width:100%"/>
+  <input id="tel" class="card" placeholder="شماره" style="width:100%;margin-top:8px"/>
+  <button class="btn" id="add" type="button">ذخیره</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
 </main>
-<nav class="dock"><a href="./sos.html">SOS</a><a class="active" href="./numbers.html">اضطراری</a><a href="./more.html">بیشتر</a></nav>
+<nav class="dock"><a href="./sos.html">SOS</a><a class="active" href="./numbers.html">شماره</a><a href="./more.html">بیشتر</a></nav>
+<script>
+function rows(){return JSON.parse(localStorage.getItem("hamsafar_contacts")||"[]")}
+function draw(){document.getElementById("out").innerHTML=rows().map(r=>`<a href="tel:${r.tel}">${r.name} ${r.tel}</a>`).join("<br>")||"خالی"}
+document.getElementById("add").onclick=()=>{const name=document.getElementById("name").value.trim();const tel=document.getElementById("tel").value.trim();if(!name||!tel)return;const a=rows();a.unshift({name,tel,at:Date.now()});localStorage.setItem("hamsafar_contacts",JSON.stringify(a.slice(0,20)));draw()}
+draw()
+</script>
 </body></html>
