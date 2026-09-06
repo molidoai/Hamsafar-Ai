@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>به‌روزرسانی</title>
+<title>به‌روز</title>
 <link rel="stylesheet" href="./styles.css"/>
 </head>
 <body>
@@ -12,20 +12,16 @@
   <h1>نسخه منتشر</h1>
   <article class="card" id="out">در حال خواندن…</article>
 </main>
-<nav class="dock">
-  <a href="./more.html">بیشتر</a>
-  <a class="active" href="./update.html">به‌روز</a>
-  <a href="./about.html">درباره</a>
-</nav>
+<nav class="dock"><a href="./more.html">بیشتر</a><a class="active" href="./update.html">به‌روز</a><a href="./android.html">اپ</a></nav>
 <script>
-fetch("./update.json").then(r=>r.json()).then(j=>{
-  const apk = j.apk && j.apk !== "null";
-  document.getElementById("out").innerHTML =
-    "<p>نسخه "+j.versionName+" — کد "+j.versionCode+"</p>"+
-    "<p>امضا "+(j.signing||[]).join(" / ")+"</p>"+
-    "<p>APK: "+(apk?("<a href='"+j.apk+"'>دانلود</a>"):"منتشر نیست")+"</p>"+
-    "<p>SHA-256 فایل: "+(j.apkSha256||"—")+"</p>"+
-    "<p>گواهی: "+(j.certSha256||"—")+"</p>";
-}).catch(()=>document.getElementById("out").textContent="مانیفست خوانده نشد");
+function show(j){
+  const apk=j.apk&&j.apk!=="null";
+  document.getElementById("out").innerHTML=
+    "<p>"+j.versionName+" — کد "+j.versionCode+"</p>"+
+    (apk?"<p><a href='"+j.apk+"'>دانلود APK</a></p>":"<p>فایل نیست</p>");
+}
+fetch("./update-32.json").then(r=>r.json()).then(show)
+  .catch(()=>fetch("./update.json").then(r=>r.json()).then(show)
+  .catch(()=>document.getElementById("out").textContent="مانیفست نیامد"));
 </script>
 </body></html>

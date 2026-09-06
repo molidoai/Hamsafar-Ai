@@ -1,0 +1,10 @@
+{
+  "applicationId": "shop.molido.hamsafar",
+  "versionName": "0.3.2",
+  "versionCode": 32,
+  "minSdk": 24,
+  "signing": ["debug"],
+  "web": "https://molidoai.github.io/Hamsafar-Ai/more.html",
+  "apk": "https://github.com/molidoai/Hamsafar-Ai/releases/download/debug-apk/app-debug.apk",
+  "notes": "Debug channel 0.3.2"
+}
