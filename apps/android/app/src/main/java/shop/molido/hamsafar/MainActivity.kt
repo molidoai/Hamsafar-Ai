@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.webkit.GeolocationPermissions
 import android.webkit.WebChromeClient
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
@@ -17,13 +18,20 @@ class MainActivity : AppCompatActivity() {
     setContentView(view)
     view.settings.javaScriptEnabled = true
     view.settings.domStorageEnabled = true
-    view.webViewClient = WebViewClient()
+    view.settings.allowFileAccess = false
+    view.webViewClient = object : WebViewClient() {
+      override fun shouldOverrideUrlLoading(v: WebView?, req: WebResourceRequest?): Boolean {
+        val next = req?.url?.toString()
+        return if (HostLock.allowed(next)) false else true
+      }
+    }
     view.webChromeClient = object : WebChromeClient() {
       override fun onGeolocationPermissionsShowPrompt(
         origin: String?,
         callback: GeolocationPermissions.Callback?
       ) {
-        callback?.invoke(origin, true, false)
+        if (origin != null && origin.contains(HostLock.HOST)) callback?.invoke(origin, true, false)
+        else callback?.invoke(origin, false, false)
       }
     }
     val home = "https://molidoai.github.io/Hamsafar-Ai/more.html"
