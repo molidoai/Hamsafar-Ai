@@ -8,5 +8,5 @@
   "apk": "https://github.com/molidoai/Hamsafar-Ai/releases/download/debug-apk/app-debug.apk",
   "apkSha256": null,
   "certSha256": null,
-  "notes": "Debug sideload channel. Next CI build replaces this file."
+  "notes": "Debug channel 0.3.2"
 }
