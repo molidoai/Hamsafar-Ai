@@ -1,12 +1,12 @@
 {
   "applicationId": "shop.molido.hamsafar",
-  "versionName": "0.3.1",
-  "versionCode": 31,
+  "versionName": "0.3.2",
+  "versionCode": 32,
   "minSdk": 24,
-  "signing": ["v2", "v3"],
+  "signing": ["debug"],
   "web": "https://molidoai.github.io/Hamsafar-Ai/more.html",
-  "apk": null,
+  "apk": "https://github.com/molidoai/Hamsafar-Ai/releases/download/debug-apk/app-debug.apk",
   "apkSha256": null,
   "certSha256": null,
-  "notes": "Fill apkSha256 and certSha256 after first signed release. Never commit the keystore."
+  "notes": "Debug sideload channel. Next CI build replaces this file."
 }

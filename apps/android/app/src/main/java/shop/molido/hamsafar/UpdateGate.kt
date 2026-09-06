@@ -13,7 +13,7 @@ data class RemoteRelease(
 
 object UpdateGate {
   const val MANIFEST = "https://molidoai.github.io/Hamsafar-Ai/update.json"
-  const val LOCAL_CODE = 31
+  const val LOCAL_CODE = 32
 
   fun fetch(): RemoteRelease? {
     val conn = URL(MANIFEST).openConnection() as HttpURLConnection
@@ -21,11 +21,12 @@ object UpdateGate {
     conn.readTimeout = 4000
     return try {
       val j = JSONObject(conn.inputStream.bufferedReader().readText())
+      fun clean(s: String?) = s?.takeIf { it.isNotBlank() && it != "null" }
       RemoteRelease(
         versionCode = j.optInt("versionCode", 0),
-        apk = j.optString("apk").ifBlank { null }.let { if (it == "null") null else it },
-        apkSha256 = j.optString("apkSha256").ifBlank { null }.let { if (it == "null") null else it },
-        certSha256 = j.optString("certSha256").ifBlank { null }.let { if (it == "null") null else it }
+        apk = clean(j.optString("apk")),
+        apkSha256 = clean(j.optString("apkSha256")),
+        certSha256 = clean(j.optString("certSha256"))
       )
     } catch (_: Exception) {
       null
