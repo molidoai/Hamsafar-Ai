@@ -3,34 +3,25 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>سرعت همسفر</title>
+<title>سرعت</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
   <div class="top"><span class="brand">MOLIDO</span><span class="ver">سرعت</span></div>
-  <h1>هشدار سرعت</h1>
-  <p class="lead">سرعت فعلی و سقف مجازی را وارد کنید. این سنسور جاده زنده نیست.</p>
-  <div class="card">سرعت فعلی <input id="cur" type="number" value="120" style="width:100%;margin-top:8px;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
-  <div class="card" style="margin-top:10px">سقف <input id="lim" type="number" value="100" style="width:100%;margin-top:8px;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
-  <button class="btn" id="chk" type="button" style="margin-top:14px">بررسی</button>
-  <div id="out" class="card" style="margin-top:14px">نتیجه اینجاست</div>
+  <h1>هشدار سرعت محلی</h1>
+  <p class="lead">سقف کیلومتر بر ساعت. بدون سرور.</p>
+  <input id="cap" type="number" value="110" class="card" style="width:100%"/>
+  <p id="out" class="card" style="margin-top:10px">منتظر GPS…</p>
 </main>
-<nav class="dock">
-  <a href="./index.html">خانه</a>
-  <a href="./trip.html">سفر</a>
-  <a class="active" href="./speed.html">سرعت</a>
-  <a href="./sos.html">SOS</a>
-</nav>
+<nav class="dock"><a href="./map.html">نقشه</a><a class="active" href="./speed.html">سرعت</a><a href="./more.html">بیشتر</a></nav>
 <script>
-document.getElementById("chk").onclick = () => {
-  const cur = Number(document.getElementById("cur").value);
-  const lim = Number(document.getElementById("lim").value);
-  const over = cur - lim;
-  let level = "آرام", msg = "در حد مجاز";
-  if (over > 20) { level = "خطر"; msg = "کاهش سرعت لازم است"; }
-  else if (over > 0) { level = "هشدار"; msg = over + " کیلومتر بالاتر از سقف"; }
-  document.getElementById("out").innerHTML = "<b>"+level+"</b><p>"+msg+"</p>";
-};
+function tick(p){
+  const kmh = (p.coords.speed||0)*3.6;
+  const cap = +document.getElementById("cap").value||110;
+  document.getElementById("out").textContent = Math.round(kmh)+" کم/س — سقف "+cap+(kmh>cap?" — بیش از سقف":"");
+}
+if(navigator.geolocation) navigator.geolocation.watchPosition(tick,()=>document.getElementById("out").textContent="GPS نیست",{enableHighAccuracy:true});
 </script>
 </body></html>

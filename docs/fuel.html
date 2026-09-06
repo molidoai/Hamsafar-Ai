@@ -1,27 +1,25 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>سوخت</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">سوخت</span></div>
-<h1>تخمین مسیر</h1>
-<p class="lead">محاسبه محلی. قیمت را خودتان بگذارید.</p>
-<div class="card">کیلومتر<input id="km" type="number" value="440" style="width:100%;margin-top:8px;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
-<div class="card" style="margin-top:8px">لیتر در ۱۰۰ کیلومتر<input id="use" type="number" value="8" style="width:100%;margin-top:8px;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
-<div class="card" style="margin-top:8px">قیمت هر لیتر (ریال)<input id="price" type="number" value="30000" style="width:100%;margin-top:8px;background:#07070c;color:#eef2ff;border:1px solid #1b2030;border-radius:10px;padding:8px"/></div>
-<button class="btn" id="go" type="button" style="margin-top:12px">محاسبه</button>
-<div id="out" class="card" style="margin-top:12px"></div>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">سوخت</span></div>
+  <h1>یادداشت سوخت</h1>
+  <input id="km" type="number" placeholder="کیلومتر" class="card" style="width:100%"/>
+  <input id="lit" type="number" placeholder="لیتر" class="card" style="width:100%;margin-top:8px"/>
+  <button class="btn" id="go" type="button">ذخیره</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
 </main>
 <nav class="dock"><a href="./trip.html">سفر</a><a class="active" href="./fuel.html">سوخت</a><a href="./more.html">بیشتر</a></nav>
 <script>
-document.getElementById("go").onclick=()=>{
- const km=+document.getElementById("km").value, use=+document.getElementById("use").value, price=+document.getElementById("price").value;
- const liters=km*use/100, cost=Math.round(liters*price);
- document.getElementById("out").innerHTML="<b>"+liters.toFixed(1)+" لیتر</b><p>"+cost.toLocaleString("fa-IR")+" ریال</p>";
-};
+function draw(){const rows=JSON.parse(localStorage.getItem("hamsafar_exp")||"[]");document.getElementById("out").innerHTML=rows.map(r=>r.km+" کم / "+r.lit+" ل").join("<br>")||"خالی";}
+document.getElementById("go").onclick=()=>{const km=+km.value,lit=+lit.value;if(!km||!lit)return;const rows=JSON.parse(localStorage.getItem("hamsafar_exp")||"[]");rows.unshift({km,lit,at:Date.now()});localStorage.setItem("hamsafar_exp",JSON.stringify(rows.slice(0,30)));draw();};
+draw();
 </script>
 </body></html>
