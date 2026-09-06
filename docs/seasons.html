@@ -1,33 +1,22 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>فصل‌ها همسفر</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>فصل‌ها</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">۱۲ فصل</span></div>
-<h1>قیمت فصلی</h1>
-<p class="lead">ضریب پایه خانواده ۶ دلار / ۲٫۹ م ریال — حرفه‌ای ۱۹ دلار / ۹٫۹ م ریال. ضریب در کف و سقف می‌ماند.</p>
+<div class="top"><span class="brand">MOLIDO</span><span class="ver">رایگان</span></div>
+<h1>۱۲ فصل — بدون قیمت</h1>
+<p class="lead">فعلا همه فصل‌ها رایگان و بازند. ضریب قیمت فقط یادآوری است.</p>
 <div id="list"></div>
 </main>
 <nav class="dock"><a href="./plans.html">نسخه</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
 <script>
-const seasons=[
-["فروردین",1.15,"نوروز و شمال"],["اردیبهشت",1.20,"اوج سفر"],["خرداد",1.10,"پایان بهار"],
-["تیر",0.95,"گرما و کویر"],["مرداد",0.90,"کم‌سفر"],["شهریور",0.85,"کم‌سفر تابستان"],
-["مهر",0.95,"بازگشت مدارس"],["آبان",1.05,"پاییز و یزد"],["آذر",1.00,"میانه"],
-["دی",0.90,"زمستان آرام"],["بهمن",1.10,"امتحان زمستانی"],["اسفند",1.25,"عید و اوج پایان"]
-];
-const base={familyUsd:6,familyIrr:2900000,proUsd:19,proIrr:9900000};
-function clip(n,lo,hi){return Math.min(hi,Math.max(lo,n));}
-document.getElementById("list").innerHTML=seasons.map(([name,m,note])=>{
- const fUsd=clip(+(base.familyUsd*m).toFixed(2),4,10);
- const pUsd=clip(+(base.proUsd*m).toFixed(2),12,29);
- const fIrr=Math.round(clip(base.familyIrr*m,1900000,4500000));
- const pIrr=Math.round(clip(base.proIrr*m,6900000,14900000));
- return `<article class="card" style="margin-bottom:8px"><h3>${name} × ${m}</h3><p>${note}</p><p class="price">خانواده ${fUsd} $ / ${fIrr.toLocaleString("fa-IR")} — حرفه‌ای ${pUsd} $ / ${pIrr.toLocaleString("fa-IR")}</p></article>`;
-}).join("");
+const seasons=[["فروردین","نوروز"],["اردیبهشت","اوج بهار"],["خرداد","پایان بهار"],["تیر","گرما"],["مرداد","کم‌سفر"],["شهریور","تابستان"],["مهر","مدارس"],["آبان","پاییز"],["آذر","میانه"],["دی","آرام"],["بهمن","زمستان"],["اسفند","عید"]];
+document.getElementById("list").innerHTML=seasons.map(([n,note])=>`<article class="card" style="margin-bottom:8px"><h3>${n}</h3><p>${note} — رایگان</p></article>`).join("");
 </script>
 </body></html>

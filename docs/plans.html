@@ -3,33 +3,22 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>نسخه‌ها همسفر</title>
+<title>نسخه‌ها</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-  <div class="top"><span class="brand">MOLIDO</span><span class="ver">نسخه</span></div>
-  <h1>نسخه فعال را انتخاب کنید</h1>
-  <p class="lead" id="current">نسخه فعلی: پایه</p>
-  <article class="card"><h3>پایه</h3><div class="price">رایگان</div><p>سفر و مقصد</p><button class="btn" type="button" onclick="pick('personal','پایه')">فعال</button></article>
-  <article class="card" style="margin-top:10px"><h3>خانواده</h3><div class="price">۶ دلار · ۲٫۹ م ریال</div><p>گروه و SOS — پرداخت واقعی نیست</p><button class="btn" type="button" onclick="pick('family','خانواده')">فعال تستی</button></article>
-  <article class="card" style="margin-top:10px"><h3>حرفه‌ای</h3><div class="price">۱۹ دلار · ۹٫۹ م ریال</div><p>دستیار مسیر — پرداخت واقعی نیست</p><button class="btn" type="button" onclick="pick('pro','حرفه‌ای')">فعال تستی</button></article>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">رایگان</span></div>
+  <h1>همه نسخه‌ها باز است</h1>
+  <p class="lead">فعلا پرداخت نیست. پایه، خانواده و حرفه‌ای همه رایگان و کامل‌اند.</p>
+  <article class="card"><h3>پایه</h3><div class="price">رایگان</div><p>سفر، نقشه، سرعت</p></article>
+  <article class="card" style="margin-top:10px"><h3>خانواده</h3><div class="price">رایگان</div><p>گروه و SOS</p></article>
+  <article class="card" style="margin-top:10px"><h3>حرفه‌ای</h3><div class="price">رایگان</div><p>فصل، مسیر، هزینه</p></article>
 </main>
 <nav class="dock">
   <a href="./index.html">خانه</a>
   <a class="active" href="./plans.html">نسخه</a>
-  <a href="./trip.html">سفر</a>
-  <a href="./sos.html">SOS</a>
+  <a href="./more.html">بیشتر</a>
 </nav>
-<script>
-function show(){
-  const e = JSON.parse(localStorage.getItem("hamsafar_edition")||'{"id":"personal","name":"پایه"}');
-  document.getElementById("current").textContent = "نسخه فعلی: " + e.name;
-}
-function pick(id,name){
-  localStorage.setItem("hamsafar_edition", JSON.stringify({id,name,at:Date.now()}));
-  show();
-}
-show();
-</script>
 </body></html>
