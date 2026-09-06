@@ -1,20 +1,25 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><title>جاده</title><link rel="stylesheet" href="./styles.css"/></head>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>جاده</title>
+<link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
+</head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">جاده</span></div>
-<h1>یادداشت جاده</h1>
-<p class="lead">این وضعیت زنده پلیس راه نیست. یادداشت محلی است.</p>
-<textarea id="note" class="card" style="width:100%;min-height:80px;background:#07070c;color:#eef2ff"></textarea>
-<button class="btn" id="save" type="button" style="margin:12px 0">ذخیره</button>
-<div id="out"></div>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">جاده</span></div>
+  <h1>یادداشت مسیر</h1>
+  <input id="note" class="card" placeholder="یخ ، گردنه ، پمپ" style="width:100%"/>
+  <button class="btn" id="add" type="button">ثبت</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
 </main>
-<nav class="dock"><a href="./stops.html">توقف</a><a class="active" href="./roads.html">جاده</a><a href="./more.html">بیشتر</a></nav>
+<nav class="dock"><a href="./map.html">نقشه</a><a class="active" href="./roads.html">جاده</a><a href="./more.html">بیشتر</a></nav>
 <script>
-const key="hamsafar_roads";
-function draw(){const rows=JSON.parse(localStorage.getItem(key)||"[]");document.getElementById("out").innerHTML=rows.map(r=>`<article class="card" style="margin-top:8px"><b>${new Date(r.at).toLocaleString("fa-IR")}</b><p>${r.text}</p></article>`).join("");}
-document.getElementById("save").onclick=()=>{const text=document.getElementById("note").value.trim();if(!text)return;const rows=JSON.parse(localStorage.getItem(key)||"[]");rows.unshift({text,at:Date.now()});localStorage.setItem(key,JSON.stringify(rows.slice(0,40)));document.getElementById("note").value="";draw();};
-draw();
+function rows(){return JSON.parse(localStorage.getItem("hamsafar_roads")||"[]")}
+function draw(){document.getElementById("out").innerHTML=rows().map(r=>r.t).join("<br>")||"خالی"}
+document.getElementById("add").onclick=()=>{const t=document.getElementById("note").value.trim();if(!t)return;const a=rows();a.unshift({t,at:Date.now()});localStorage.setItem("hamsafar_roads",JSON.stringify(a.slice(0,40)));document.getElementById("note").value="";draw()}
+draw()
 </script>
 </body></html>
