@@ -1,18 +1,25 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>توقف مسیر</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>توقف</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">توقف</span></div>
-<h1>نقاط آرام مسیر</h1>
-<article class="card"><h3>تهران — اصفهان</h3><p>قم، کاشان. هر ۱۵۰ کیلومتر یک ایست.</p></article>
-<article class="card" style="margin-top:8px"><h3>تهران — مشهد</h3><p>سمنان، دامغان. شب طولانی را بشکنید.</p></article>
-<article class="card" style="margin-top:8px"><h3>تهران — رشت</h3><p>قزوین. مه‌آلود و مه را حساب کنید.</p></article>
-<article class="card" style="margin-top:8px"><h3>تهران — تبریز</h3><p>زنجان. سرعت طولانی را کاهش دهید.</p></article>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">توقف</span></div>
+  <h1>توقف‌گاه</h1>
+  <input id="note" class="card" placeholder="نام مجتمع یا پمپ" style="width:100%"/>
+  <button class="btn" id="add" type="button">ذخیره</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
 </main>
-<nav class="dock"><a href="./trip.html">سفر</a><a class="active" href="./stops.html">توقف</a><a href="./more.html">بیشتر</a></nav>
+<nav class="dock"><a href="./fuel.html">سوخت</a><a class="active" href="./stops.html">توقف</a><a href="./more.html">بیشتر</a></nav>
+<script>
+function rows(){return JSON.parse(localStorage.getItem("hamsafar_roads")||"[]")}
+function draw(){document.getElementById("out").innerHTML=rows().map(r=>r.t).join("<br>")||"خالی"}
+document.getElementById("add").onclick=()=>{const t=document.getElementById("note").value.trim();if(!t)return;const a=rows();a.unshift({t,at:Date.now()});localStorage.setItem("hamsafar_roads",JSON.stringify(a.slice(0,40)));document.getElementById("note").value="";draw()}
+draw()
+</script>
 </body></html>
