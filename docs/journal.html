@@ -3,37 +3,23 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>دفتر سفر</title>
+<title>دفتر</title>
 <link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
   <div class="top"><span class="brand">MOLIDO</span><span class="ver">دفتر</span></div>
-  <h1>یادداشت مسیر</h1>
-  <textarea id="note" class="card" style="width:100%;min-height:90px;background:#07070c;color:#eef2ff"></textarea>
-  <button class="btn" id="save" type="button" style="margin:12px 0">ذخیره</button>
-  <div id="out"></div>
+  <h1>یادداشت سفر</h1>
+  <textarea id="note" class="card" rows="4" style="width:100%" placeholder="چه دیدید"></textarea>
+  <button class="btn" id="add" type="button">ثبت</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
 </main>
-<nav class="dock">
-  <a href="./trip.html">سفر</a>
-  <a class="active" href="./journal.html">دفتر</a>
-  <a href="./more.html">بیشتر</a>
-</nav>
+<nav class="dock"><a href="./trip.html">سفر</a><a class="active" href="./journal.html">دفتر</a><a href="./more.html">بیشتر</a></nav>
 <script>
-const key="hamsafar_journal";
-function draw(){
-  const rows=JSON.parse(localStorage.getItem(key)||"[]");
-  document.getElementById("out").innerHTML=rows.map(r=>`<article class="card" style="margin-bottom:8px"><b>${new Date(r.at).toLocaleString("fa-IR")}</b><p>${r.text}</p></article>`).join("")||"<p class=lead>یادداشتی نیست</p>";
-}
-document.getElementById("save").onclick=()=>{
-  const text=document.getElementById("note").value.trim();
-  if(!text) return;
-  const rows=JSON.parse(localStorage.getItem(key)||"[]");
-  rows.unshift({text,at:Date.now()});
-  localStorage.setItem(key, JSON.stringify(rows.slice(0,50)));
-  document.getElementById("note").value="";
-  draw();
-};
-draw();
+function rows(){return JSON.parse(localStorage.getItem("hamsafar_journal")||"[]")}
+function draw(){document.getElementById("out").innerHTML=rows().map(r=>r.t).join("<hr>")||"خالی"}
+document.getElementById("add").onclick=()=>{const t=document.getElementById("note").value.trim();if(!t)return;const a=rows();a.unshift({t,at:Date.now()});localStorage.setItem("hamsafar_journal",JSON.stringify(a.slice(0,50)));document.getElementById("note").value="";draw()}
+draw()
 </script>
 </body></html>
