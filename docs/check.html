@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>چک‌لیست</title>
+<link rel="stylesheet" href="./styles.css"/>
+<script src="./access.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">چک</span></div>
+  <h1>چک‌لیست سفر</h1>
+  <input id="item" class="card" placeholder="مثل آب" style="width:100%"/>
+  <button class="btn" id="add" type="button">افزودن</button>
+  <div id="out" class="card" style="margin-top:12px"></div>
+</main>
+<nav class="dock"><a href="./trip.html">سفر</a><a class="active" href="./check.html">چک</a><a href="./more.html">بیشتر</a></nav>
+<script>
+function rows(){return JSON.parse(localStorage.getItem("hamsafar_check")||"[]")}
+function draw(){document.getElementById("out").innerHTML=rows().map(r=>r.t).join("<br>")||"خالی"}
+document.getElementById("add").onclick=()=>{const t=document.getElementById("item").value.trim();if(!t)return;const a=rows();a.unshift({t,at:Date.now()});localStorage.setItem("hamsafar_check",JSON.stringify(a.slice(0,40)));document.getElementById("item").value="";draw()}
+draw()
+</script>
+</body></html>
