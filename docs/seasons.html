@@ -9,21 +9,16 @@
 </head>
 <body>
 <main class="wrap">
-  <div class="top"><span class="brand">MOLIDO</span><span class="ver">۱۲ ماه</span></div>
-  <h1>فصل‌های سفر</h1>
-  <article class="card"><h3>فروردین</h3><p>نوروز — جاده‌ها شلوغ. شمال مرطوب. جنوب مناسب سفر.</p></article>
-  <article class="card" style="margin-top:8px"><h3>اردیبهشت</h3><p>بهار و شیراز خوب. گردنه کمتر از فروردین.</p></article>
-  <article class="card" style="margin-top:8px"><h3>خرداد</h3><p>شروع گرما. جنوب داغ می‌شود. آب و سوخت را چک کنید.</p></article>
-  <article class="card" style="margin-top:8px"><h3>تیر</h3><p>شمال اوج سفر. چالوس و هراز شلوغ. شب رانندگی نکنید.</p></article>
-  <article class="card" style="margin-top:8px"><h3>مرداد</h3><p>تابستان تمام. کوهستان سرد. جنوب فقط شب.</p></article>
-  <article class="card" style="margin-top:8px"><h3>شهریور</h3><p>هنوز گرم. خزر اول مرداد برگشت.</p></article>
-  <article class="card" style="margin-top:8px"><h3>مهر</h3><p>پاییز خوب. کردستان و غرب مناسب. شمال خنک‌تر.</p></article>
-  <article class="card" style="margin-top:8px"><h3>آبان</h3><p>باران اول. جاده کوهستان لغزنده. زنجیر زود.</p></article>
-  <article class="card" style="margin-top:8px"><h3>آذر</h3><p>جنوب خوب. کیش و هرمز. شمال سرد و مه.</p></article>
-  <article class="card" style="margin-top:8px"><h3>دی</h3><p>زمستان. یخ جاده‌های بالا. جنوب هنوز قابل سفر.</p></article>
-  <article class="card" style="margin-top:8px"><h3>بهمن</h3><p>بهمن شمال سخت. لنز زمستانی. جنوب ملایم.</p></article>
-  <article class="card" style="margin-top:8px"><h3>اسفند</h3><p>بازگشت عید. جاده شلوغ می‌شود. بنزین روز زود حرکت کنید.</p></article>
-  <p><a href="./peak.html">اوج</a></p>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">۱۲ فصل</span></div>
+  <h1>فصل‌های جدید</h1>
+  <div id="out"></div>
 </main>
 <nav class="dock"><a href="./peak.html">اوج</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
+<script>
+fetch("./seasons.json").then(r=>r.json()).then(rows=>{
+  document.getElementById("out").innerHTML=rows.map(s=>
+    `<article class="card" style="margin-top:8px"><h3>${s.id}. ${s.name}</h3><p>${s.when} — بار ${s.load}</p><p>${s.note}</p></article>`
+  ).join("");
+}).catch(()=>{document.getElementById("out").textContent="داده نیامد";});
+</script>
 </body></html>
