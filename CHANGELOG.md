@@ -1,11 +1,13 @@
 # Changelog
 
-## 0.3.1 — 2026-09-05
+## 0.3.2 / 32
+- GitHub Actions debug APK
+- Public release tag `debug-apk`
+- UpdateGate + update-32.json
+- All editions free
+- Speed, fuel, journal, roads, night, stops, numbers, peak
 
-- اجرای ویندوز بدون bash: `scripts/dev-local.cmd`
-- راهنمای CMD در `docs/release/WINDOWS.md`
-- پیش‌نمایش GitHub Pages بروز شد
-
-## 0.3.0 — 2026-09-05
-
-نسخه محلی قابل‌اجرا. سه نسخه فروش، فاکتور، قیمت فصلی، وب روی پورت ۸۰۸۰.
+## 0.3.1 / 31
+- First WebView debug APK
+- PWA on GitHub Pages `/docs`
+- PIN vault, map, SOS, trip
