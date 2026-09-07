@@ -15,10 +15,25 @@
 </main>
 <nav class="dock"><a href="./peak.html">اوج</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
 <script>
-fetch("./seasons.json").then(r=>r.json()).then(rows=>{
+const FALLBACK=[
+{id:1,name:"پیش‌نوروز",when:"اسفند",load:"بالا",note:"بازگشت عید"},
+{id:2,name:"نوروز",when:"۱–۱۵ فروردین",load:"بسیار بالا",note:"همه جاده‌ها شلوغ"},
+{id:3,name:"بهار میانه",when:"اردیبهشت",load:"متوسط",note:"جنوب و بهار خوب"},
+{id:4,name:"خرداد گرم",when:"خرداد",load:"متوسط",note:"شروع گرما"},
+{id:5,name:"تیر شمال",when:"تیر",load:"بالا",note:"چالوس و هراز اوج"},
+{id:6,name:"مرداد اوج",when:"مرداد",load:"بالا",note:"کوهستان سرد"},
+{id:7,name:"شهریور برگشت",when:"شهریور",load:"بالا",note:"خزر اول مرداد"},
+{id:8,name:"مهر معتدل",when:"مهر",load:"کم",note:"کردستان و غرب"},
+{id:9,name:"آبان باران",when:"آبان",load:"متوسط",note:"جاده لغز"},
+{id:10,name:"آذر جنوب",when:"آذر",load:"کم",note:"کیش و هرمز"},
+{id:11,name:"دی یخ",when:"دی",load:"کم",note:"جاده بالا یخ"},
+{id:12,name:"بهمن برف",when:"بهمن",load:"متوسط",note:"بهمن شمال"}
+];
+function draw(rows){
   document.getElementById("out").innerHTML=rows.map(s=>
     `<article class="card" style="margin-top:8px"><h3>${s.id}. ${s.name}</h3><p>${s.when} — بار ${s.load}</p><p>${s.note}</p></article>`
   ).join("");
-}).catch(()=>{document.getElementById("out").textContent="داده نیامد";});
+}
+fetch("./seasons.json").then(r=>r.json()).then(draw).catch(()=>draw(FALLBACK));
 </script>
 </body></html>
