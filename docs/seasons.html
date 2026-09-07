@@ -3,20 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>فصل‌ها</title>
+<title>۱۲ فصل</title>
 <link rel="stylesheet" href="./styles.css"/>
 <script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
-<div class="top"><span class="brand">MOLIDO</span><span class="ver">رایگان</span></div>
-<h1>۱۲ فصل — بدون قیمت</h1>
-<p class="lead">فعلا همه فصل‌ها رایگان و بازند. ضریب قیمت فقط یادآوری است.</p>
-<div id="list"></div>
+  <div class="top"><span class="brand">MOLIDO</span><span class="ver">۱۲ ماه</span></div>
+  <h1>فصل‌های سفر</h1>
+  <article class="card"><h3>فروردین</h3><p>نوروز — جاده‌ها شلوغ. شمال مرطوب. جنوب مناسب سفر.</p></article>
+  <article class="card" style="margin-top:8px"><h3>اردیبهشت</h3><p>بهار و شیراز خوب. گردنه کمتر از فروردین.</p></article>
+  <article class="card" style="margin-top:8px"><h3>خرداد</h3><p>شروع گرما. جنوب داغ می‌شود. آب و سوخت را چک کنید.</p></article>
+  <article class="card" style="margin-top:8px"><h3>تیر</h3><p>شمال اوج سفر. چالوس و هراز شلوغ. شب رانندگی نکنید.</p></article>
+  <article class="card" style="margin-top:8px"><h3>مرداد</h3><p>تابستان تمام. کوهستان سرد. جنوب فقط شب.</p></article>
+  <article class="card" style="margin-top:8px"><h3>شهریور</h3><p>هنوز گرم. خزر اول مرداد برگشت.</p></article>
+  <article class="card" style="margin-top:8px"><h3>مهر</h3><p>پاییز خوب. کردستان و غرب مناسب. شمال خنک‌تر.</p></article>
+  <article class="card" style="margin-top:8px"><h3>آبان</h3><p>باران اول. جاده کوهستان لغزنده. زنجیر زود.</p></article>
+  <article class="card" style="margin-top:8px"><h3>آذر</h3><p>جنوب خوب. کیش و هرمز. شمال سرد و مه.</p></article>
+  <article class="card" style="margin-top:8px"><h3>دی</h3><p>زمستان. یخ جاده‌های بالا. جنوب هنوز قابل سفر.</p></article>
+  <article class="card" style="margin-top:8px"><h3>بهمن</h3><p>بهمن شمال سخت. لنز زمستانی. جنوب ملایم.</p></article>
+  <article class="card" style="margin-top:8px"><h3>اسفند</h3><p>بازگشت عید. جاده شلوغ می‌شود. بنزین روز زود حرکت کنید.</p></article>
+  <p><a href="./peak.html">اوج</a></p>
 </main>
-<nav class="dock"><a href="./plans.html">نسخه</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
-<script>
-const seasons=[["فروردین","نوروز"],["اردیبهشت","اوج بهار"],["خرداد","پایان بهار"],["تیر","گرما"],["مرداد","کم‌سفر"],["شهریور","تابستان"],["مهر","مدارس"],["آبان","پاییز"],["آذر","میانه"],["دی","آرام"],["بهمن","زمستان"],["اسفند","عید"]];
-document.getElementById("list").innerHTML=seasons.map(([n,note])=>`<article class="card" style="margin-bottom:8px"><h3>${n}</h3><p>${note} — رایگان</p></article>`).join("");
-</script>
+<nav class="dock"><a href="./peak.html">اوج</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
 </body></html>
