@@ -1,42 +1,18 @@
 # MOLIDO HAMSAFAR
 
-پلتفرم سفر هوشمند، چندزبانه، آفلاین‌محور و تحت حاکمیت AI.
+سفر آفلاین ایران. فعلاً همه امکانات باز و رایگان است.
 
-## وضعیت
+## الان
 
-- مخزن: [molidoai/Hamsafar-Ai](https://github.com/molidoai/Hamsafar-Ai)
-- دامنه بعدی: `hamsafa.molido.shop`
-- فازهای محلی: `000` تا `028` = PASS
-- نسخه جاری: **۰٫۳٫۰**
-- انتشار: گیت‌هاب + اجرای محلی؛ هاست لازم نیست
-- سرور ابری / درگاه پرداخت / نقشه زنده: هنوز نیست
+- وب: https://molidoai.github.io/Hamsafar-Ai/more.html
+- APK دیباگ: https://github.com/molidoai/Hamsafar-Ai/releases/download/debug-apk/app-debug.apk
+- نسخه: ۰٫۳٫۲ / versionCode 32
+- Pages از پوشه `docs`
 
-## اجرای کامل محلی
+## بیلد
 
-```bash
-bash scripts/dev-local.sh
-```
+Actions ورک‌فلو `android-debug` فایل دیباگ را روی تگ `debug-apk` می‌گذارد.
 
-بعد در مرورگر:
+## بعدا
 
-- اپ: http://127.0.0.1:8080
-- مرکز کنترل: http://127.0.0.1:8080/admin
-- سلامت: http://127.0.0.1:8080/health
-- نسخه‌ها: http://127.0.0.1:8080/editions
-
-## نسخه‌های فروش
-
-| نسخه | دلار | ریال | امکانات |
-|------|------|------|---------|
-| پایه | رایگان | ۰ | سفر، مقصد، سرعت، آفلاین |
-| خانواده | ۶ / ماه | ۲٫۹۰۰٫۰۰۰ | گروه + SOS |
-| حرفه‌ای | ۱۹ / ماه | ۹٫۹۰۰٫۰۰۰ | دستیار مسیر + سقف بالاتر |
-
-سفارش پولی فقط `pending` است. درگاه واقعی وصل نیست.
-
-## معماری قفل‌شده
-
-1. Foundation Lock
-2. Governed Core
-3. Usable Product Core
-4. Expansion Layer
+keystore و APK امضاشده جدا از دیباگ. دامنه `hamsafa.molido.shop` هنوز وصل نیست.
