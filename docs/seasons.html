@@ -5,35 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>۱۲ فصل</title>
 <link rel="stylesheet" href="./styles.css"/>
-<script src="./access.js"></script>
 </head>
 <body>
 <main class="wrap">
   <div class="top"><span class="brand">MOLIDO</span><span class="ver">۱۲ فصل</span></div>
   <h1>فصل‌های جدید</h1>
-  <div id="out"></div>
+  <article class="card"><h3>۱. پیش‌نوروز</h3><p>اسفند — بار بالا — بازگشت عید</p></article>
+  <article class="card" style="margin-top:8px"><h3>۲. نوروز</h3><p>۱–۱۵ فروردین — بار بسیار بالا — جاده شلوغ</p></article>
+  <article class="card" style="margin-top:8px"><h3>۳. بهار میانه</h3><p>اردیبهشت — بار متوسط — جنوب و بهار</p></article>
+  <article class="card" style="margin-top:8px"><h3>۴. خرداد گرم</h3><p>خرداد — بار متوسط — شروع گرما</p></article>
+  <article class="card" style="margin-top:8px"><h3>۵. تیر شمال</h3><p>تیر — بار بالا — چالوس و هراز</p></article>
+  <article class="card" style="margin-top:8px"><h3>۶. مرداد اوج</h3><p>مرداد — بار بالا — کوهستان سرد</p></article>
+  <article class="card" style="margin-top:8px"><h3>۷. شهریور برگشت</h3><p>شهریور — بار بالا — خزر اول مرداد</p></article>
+  <article class="card" style="margin-top:8px"><h3>۸. مهر معتدل</h3><p>مهر — بار کم — کردستان و غرب</p></article>
+  <article class="card" style="margin-top:8px"><h3>۹. آبان باران</h3><p>آبان — بار متوسط — جاده لغز</p></article>
+  <article class="card" style="margin-top:8px"><h3>۱۰. آذر جنوب</h3><p>آذر — بار کم — کیش و هرمز</p></article>
+  <article class="card" style="margin-top:8px"><h3>۱۱. دی یخ</h3><p>دی — بار کم — جاده بالا یخ</p></article>
+  <article class="card" style="margin-top:8px"><h3>۱۲. بهمن برف</h3><p>بهمن — بار متوسط — بهمن شمال</p></article>
 </main>
 <nav class="dock"><a href="./peak.html">اوج</a><a class="active" href="./seasons.html">فصل</a><a href="./more.html">بیشتر</a></nav>
-<script>
-const FALLBACK=[
-{id:1,name:"پیش‌نوروز",when:"اسفند",load:"بالا",note:"بازگشت عید"},
-{id:2,name:"نوروز",when:"۱–۱۵ فروردین",load:"بسیار بالا",note:"همه جاده‌ها شلوغ"},
-{id:3,name:"بهار میانه",when:"اردیبهشت",load:"متوسط",note:"جنوب و بهار خوب"},
-{id:4,name:"خرداد گرم",when:"خرداد",load:"متوسط",note:"شروع گرما"},
-{id:5,name:"تیر شمال",when:"تیر",load:"بالا",note:"چالوس و هراز اوج"},
-{id:6,name:"مرداد اوج",when:"مرداد",load:"بالا",note:"کوهستان سرد"},
-{id:7,name:"شهریور برگشت",when:"شهریور",load:"بالا",note:"خزر اول مرداد"},
-{id:8,name:"مهر معتدل",when:"مهر",load:"کم",note:"کردستان و غرب"},
-{id:9,name:"آبان باران",when:"آبان",load:"متوسط",note:"جاده لغز"},
-{id:10,name:"آذر جنوب",when:"آذر",load:"کم",note:"کیش و هرمز"},
-{id:11,name:"دی یخ",when:"دی",load:"کم",note:"جاده بالا یخ"},
-{id:12,name:"بهمن برف",when:"بهمن",load:"متوسط",note:"بهمن شمال"}
-];
-function draw(rows){
-  document.getElementById("out").innerHTML=rows.map(s=>
-    `<article class="card" style="margin-top:8px"><h3>${s.id}. ${s.name}</h3><p>${s.when} — بار ${s.load}</p><p>${s.note}</p></article>`
-  ).join("");
-}
-fetch("./seasons.json").then(r=>r.json()).then(draw).catch(()=>draw(FALLBACK));
-</script>
 </body></html>
