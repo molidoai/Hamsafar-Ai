@@ -1,13 +1,12 @@
 # Changelog
 
 ## 0.3.2 / 32
-- GitHub Actions debug APK
-- Public release tag `debug-apk`
+- Debug APK on tag debug-apk
 - UpdateGate + update-32.json
+- 12 travel seasons (static page + seasons.json)
+- Popular routes, privacy, help, about
 - All editions free
-- Speed, fuel, journal, roads, night, stops, numbers, peak
 
 ## 0.3.1 / 31
 - First WebView debug APK
-- PWA on GitHub Pages `/docs`
-- PIN vault, map, SOS, trip
+- PWA on GitHub Pages /docs
