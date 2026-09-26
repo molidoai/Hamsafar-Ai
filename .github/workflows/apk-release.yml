@@ -4,15 +4,39 @@ on:
   push:
     tags:
       - "apk-*"
+permissions:
+  contents: write
 jobs:
-  note:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Guard
+      - name: Require secrets
         run: |
-          if [ ! -f apps/android/gradlew ]; then
-            echo "Gradle wrapper missing. Open apps/android in Android Studio first."
-            echo "Do not put the keystore in git. Add SIGNING_KEY secret later."
+          if [ -z "${{ secrets.KEYSTORE_BASE64 }}" ]; then
+            echo "Put KEYSTORE_BASE64 KEYSTORE_PASSWORD KEY_ALIAS KEY_PASSWORD in repo Secrets."
             exit 1
           fi
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10.2"
+      - name: Decode keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > /tmp/hamsafar.jks
+      - name: Assemble release
+        working-directory: apps/android
+        env:
+          KEYSTORE_PATH: /tmp/hamsafar.jks
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: gradle :app:assembleRelease --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hamsafar-release
+          path: apps/android/app/build/outputs/apk/release/*.apk
